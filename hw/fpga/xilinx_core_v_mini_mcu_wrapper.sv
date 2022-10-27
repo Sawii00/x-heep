@@ -23,11 +23,11 @@ module xilinx_core_v_mini_mcu_wrapper
     inout logic boot_select_i,
     inout logic execute_from_flash_i,
 
-    inout logic jtag_tck_i,
-    inout logic jtag_tms_i,
-    inout logic jtag_trst_ni,
-    inout logic jtag_tdi_i,
-    inout logic jtag_tdo_o,
+    //inout logic jtag_tck_i,
+    //inout logic jtag_tms_i,
+    //inout logic jtag_trst_ni,
+    //inout logic jtag_tdi_i,
+    //inout logic jtag_tdo_o,
 
     inout logic uart_rx_i,
     inout logic uart_tx_o,
@@ -46,7 +46,29 @@ module xilinx_core_v_mini_mcu_wrapper
     inout logic spi_sck_o,
 
     inout logic i2c_scl_io,
-    inout logic i2c_sda_io
+    inout logic i2c_sda_io,
+
+      inout wire [14:0]DDR_addr,
+      inout wire [2:0]DDR_ba,
+      inout wire DDR_cas_n,
+      inout wire DDR_ck_n,
+      inout wire DDR_ck_p,
+      inout wire DDR_cke,
+      inout wire DDR_cs_n,
+      inout wire [3:0]DDR_dm,
+      inout wire [31:0]DDR_dq,
+      inout wire [3:0]DDR_dqs_n,
+      inout wire [3:0]DDR_dqs_p,
+      inout wire DDR_odt,
+      inout wire DDR_ras_n,
+      inout wire DDR_reset_n,
+      inout wire DDR_we_n,
+      inout wire FIXED_IO_ddr_vrn,
+      inout wire FIXED_IO_ddr_vrp,
+      inout wire [53:0]FIXED_IO_mio,
+      inout wire FIXED_IO_ps_clk,
+      inout wire FIXED_IO_ps_porb,
+      inout wire FIXED_IO_ps_srstb
 
 );
 
@@ -54,6 +76,12 @@ module xilinx_core_v_mini_mcu_wrapper
   logic [                      31:0] exit_value;
   wire                               rst_n;
   logic [CLK_LED_COUNT_LENGTH - 1:0] clk_count;
+      //wire  [4:0]PS_GPIO2JTAG_tri_io;
+      logic jtag_tck_i;
+      logic jtag_tms_i;
+      logic jtag_trst_ni;
+      logic jtag_tdi_i;
+      logic jtag_tdo_o;
 
   // low active reset
   assign rst_n   = !rst_i;
@@ -79,6 +107,36 @@ module xilinx_core_v_mini_mcu_wrapper
       .clk_125MHz(clk_i),
       .clk_out1_0(clk_gen)
   );
+
+  processing_system_wrapper processing_system_wrapper_i (
+      .DDR_addr(DDR_addr),
+      .DDR_ba(DDR_ba),
+      .DDR_cas_n(DDR_cas_n),
+      .DDR_ck_n(DDR_ck_n),
+      .DDR_ck_p(DDR_ck_p),
+      .DDR_cke(DDR_cke),
+      .DDR_cs_n(DDR_cs_n),
+      .DDR_dm(DDR_dm),
+      .DDR_dq(DDR_dq),
+      .DDR_dqs_n(DDR_dqs_n),
+      .DDR_dqs_p(DDR_dqs_p),
+      .DDR_odt(DDR_odt),
+      .DDR_ras_n(DDR_ras_n),
+      .DDR_reset_n(DDR_reset_n),
+      .DDR_we_n(DDR_we_n),
+      .FIXED_IO_ddr_vrn(FIXED_IO_ddr_vrn),
+      .FIXED_IO_ddr_vrp(FIXED_IO_ddr_vrp),
+      .FIXED_IO_mio(FIXED_IO_mio),
+      .FIXED_IO_ps_clk(FIXED_IO_ps_clk),
+      .FIXED_IO_ps_porb(FIXED_IO_ps_porb),
+      .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
+      .gpio_jtag_tck_i(jtag_tck_i),
+      .gpio_jtag_tms_i  (jtag_tms_i),
+      .gpio_jtag_trst_ni(jtag_trst_ni),
+      .gpio_jtag_tdi_i  (jtag_tdi_i),
+      .gpio_jtag_tdo_o  (jtag_tdo_o)
+  );
+
 
   x_heep_system x_heep_system_i (
 
