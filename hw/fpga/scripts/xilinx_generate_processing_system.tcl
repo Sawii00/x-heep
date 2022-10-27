@@ -45,14 +45,19 @@ connect_bd_net [get_bd_pins xlconcat_0/dout] [get_bd_pins processing_system7_0/G
 connect_bd_net [get_bd_ports gpio_jtag_tdo_o] [get_bd_pins xlconcat_0/In1]
 
 # ILA
-create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_0
-set_property -dict [list CONFIG.PCW_EN_CLK0_PORT {1}] [get_bd_cells processing_system7_0]
-connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins ila_0/clk]
-set_property -dict [list CONFIG.C_NUM_OF_PROBES {4} CONFIG.C_ENABLE_ILA_AXI_MON {false} CONFIG.C_MONITOR_TYPE {Native}] [get_bd_cells ila_0]
-connect_bd_net [get_bd_pins ila_0/probe0] [get_bd_pins xlslice_0/Dout]
-connect_bd_net [get_bd_pins ila_0/probe1] [get_bd_pins xlslice_1/Dout]
-connect_bd_net [get_bd_pins ila_0/probe2] [get_bd_pins xlslice_2/Dout]
-connect_bd_net [get_bd_pins ila_0/probe3] [get_bd_pins xlslice_3/Dout]
+#create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_0
+#set_property -dict [list CONFIG.PCW_EN_CLK0_PORT {1}] [get_bd_cells processing_system7_0]
+#connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins ila_0/clk]
+#set_property -dict [list CONFIG.C_NUM_OF_PROBES {4} CONFIG.C_ENABLE_ILA_AXI_MON {false} CONFIG.C_MONITOR_TYPE {Native}] [get_bd_cells ila_0]
+#connect_bd_net [get_bd_pins ila_0/probe0] [get_bd_pins xlslice_0/Dout]
+#connect_bd_net [get_bd_pins ila_0/probe1] [get_bd_pins xlslice_1/Dout]
+#connect_bd_net [get_bd_pins ila_0/probe2] [get_bd_pins xlslice_2/Dout]
+#connect_bd_net [get_bd_pins ila_0/probe3] [get_bd_pins xlslice_3/Dout]
+
+set_property -dict [list CONFIG.PCW_UART1_PERIPHERAL_ENABLE {1} CONFIG.PCW_UART1_UART1_IO {EMIO}] [get_bd_cells processing_system7_0]
+#set_property -dict [list CONFIG.PCW_UART0_PERIPHERAL_ENABLE {1} CONFIG.PCW_UART0_GRP_FULL_ENABLE {0}] [get_bd_cells processing_system7_0]
+make_bd_intf_pins_external  [get_bd_intf_pins processing_system7_0/UART_1]
+set_property name UART [get_bd_intf_ports UART_1_0]
 
 
 save_bd_design

@@ -29,8 +29,8 @@ module xilinx_core_v_mini_mcu_wrapper
     //inout logic jtag_tdi_i,
     //inout logic jtag_tdo_o,
 
-    inout logic uart_rx_i,
-    inout logic uart_tx_o,
+    //inout logic uart_rx_i,
+    //inout logic uart_tx_o,
 
     inout logic [29:0] gpio_io,
 
@@ -48,27 +48,27 @@ module xilinx_core_v_mini_mcu_wrapper
     inout logic i2c_scl_io,
     inout logic i2c_sda_io,
 
-      inout wire [14:0]DDR_addr,
-      inout wire [2:0]DDR_ba,
-      inout wire DDR_cas_n,
-      inout wire DDR_ck_n,
-      inout wire DDR_ck_p,
-      inout wire DDR_cke,
-      inout wire DDR_cs_n,
-      inout wire [3:0]DDR_dm,
-      inout wire [31:0]DDR_dq,
-      inout wire [3:0]DDR_dqs_n,
-      inout wire [3:0]DDR_dqs_p,
-      inout wire DDR_odt,
-      inout wire DDR_ras_n,
-      inout wire DDR_reset_n,
-      inout wire DDR_we_n,
-      inout wire FIXED_IO_ddr_vrn,
-      inout wire FIXED_IO_ddr_vrp,
-      inout wire [53:0]FIXED_IO_mio,
-      inout wire FIXED_IO_ps_clk,
-      inout wire FIXED_IO_ps_porb,
-      inout wire FIXED_IO_ps_srstb
+    inout wire [14:0] DDR_addr,
+    inout wire [2:0] DDR_ba,
+    inout wire DDR_cas_n,
+    inout wire DDR_ck_n,
+    inout wire DDR_ck_p,
+    inout wire DDR_cke,
+    inout wire DDR_cs_n,
+    inout wire [3:0] DDR_dm,
+    inout wire [31:0] DDR_dq,
+    inout wire [3:0] DDR_dqs_n,
+    inout wire [3:0] DDR_dqs_p,
+    inout wire DDR_odt,
+    inout wire DDR_ras_n,
+    inout wire DDR_reset_n,
+    inout wire DDR_we_n,
+    inout wire FIXED_IO_ddr_vrn,
+    inout wire FIXED_IO_ddr_vrp,
+    inout wire [53:0] FIXED_IO_mio,
+    inout wire FIXED_IO_ps_clk,
+    inout wire FIXED_IO_ps_porb,
+    inout wire FIXED_IO_ps_srstb
 
 );
 
@@ -76,13 +76,15 @@ module xilinx_core_v_mini_mcu_wrapper
   logic [                      31:0] exit_value;
   wire                               rst_n;
   logic [CLK_LED_COUNT_LENGTH - 1:0] clk_count;
-      //wire  [4:0]PS_GPIO2JTAG_tri_io;
-      logic jtag_tck_i;
-      logic jtag_tms_i;
-      logic jtag_trst_ni;
-      logic jtag_tdi_i;
-      logic jtag_tdo_o;
+  //wire  [4:0]PS_GPIO2JTAG_tri_io;
+  logic                              jtag_tck_i;
+  logic                              jtag_tms_i;
+  logic                              jtag_trst_ni;
+  logic                              jtag_tdi_i;
+  logic                              jtag_tdo_o;
 
+  logic                              UART_rxd_sig;
+  logic                              UART_txd_sig;
   // low active reset
   assign rst_n   = !rst_i;
 
@@ -130,11 +132,13 @@ module xilinx_core_v_mini_mcu_wrapper
       .FIXED_IO_ps_clk(FIXED_IO_ps_clk),
       .FIXED_IO_ps_porb(FIXED_IO_ps_porb),
       .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
+      .UART_rxd(UART_rxd_sig),
+      .UART_txd(UART_txd_sig),
       .gpio_jtag_tck_i(jtag_tck_i),
-      .gpio_jtag_tms_i  (jtag_tms_i),
+      .gpio_jtag_tms_i(jtag_tms_i),
       .gpio_jtag_trst_ni(jtag_trst_ni),
-      .gpio_jtag_tdi_i  (jtag_tdi_i),
-      .gpio_jtag_tdo_o  (jtag_tdo_o)
+      .gpio_jtag_tdi_i(jtag_tdi_i),
+      .gpio_jtag_tdo_o(jtag_tdo_o)
   );
 
 
@@ -156,8 +160,8 @@ module xilinx_core_v_mini_mcu_wrapper
       .ext_peripheral_slave_req_o(),
       .ext_peripheral_slave_resp_i('0),
 
-      .uart_rx_i(uart_rx_i),
-      .uart_tx_o(uart_tx_o),
+      .uart_rx_i(UART_txd_sig),
+      .uart_tx_o(UART_rxd_sig),
 
       .intr_vector_ext_i('0),
 
