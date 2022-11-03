@@ -40,6 +40,9 @@ mcu-gen-help:
 verible:
 	util/format-verible;
 
+app-sound:
+	$(MAKE) -C sw applications/sound_code/sound_code.hex  TARGET=$(TARGET)
+
 app-helloworld:
 	$(MAKE) -C sw applications/hello_world/hello_world.hex  TARGET=$(TARGET)
 

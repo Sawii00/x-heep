@@ -398,6 +398,5 @@ power_manager_result_t power_gate_counters_init(power_manager_counters_t* counte
     counters->switch_on  = switch_on;
     counters->iso_off    = iso_off;
     counters->iso_on     = iso_on;
-
     return kPowerManagerOk_e;
 }
