@@ -2,18 +2,24 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Thu Nov  3 21:03:22 2022
-# Process ID: 13594
+# Start of session at: Thu Nov  3 20:14:19 2022
+# Process ID: 6407
 # Current directory: /home/saverio/Documents/x-heep-biomedical/x-heep
 # Command line: vivado
 # Log file: /home/saverio/Documents/x-heep-biomedical/x-heep/vivado.log
 # Journal file: /home/saverio/Documents/x-heep-biomedical/x-heep/vivado.jou
-# Running On: sawi, OS: Linux, CPU Frequency: 858.956 MHz, CPU Physical cores: 2, Host memory: 7907 MB
+# Running On: sawi, OS: Linux, CPU Frequency: 900.097 MHz, CPU Physical cores: 2, Host memory: 7907 MB
 #-----------------------------------------------------------
 start_gui
 open_project /home/saverio/Documents/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr
 open_bd_design {/home/saverio/Documents/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/xilinx_clk_wizard/xilinx_clk_wizard.bd}
-close_project
-open_project /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr
-open_bd_design {/home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/processing_system/processing_system.bd}
-set_property name AXI_HP_ACLK [get_bd_ports S_AXI_HP0_ACLK_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
+endgroup
+set_property -dict [list CONFIG.PCW_USE_S_AXI_HP0 {1} CONFIG.PCW_S_AXI_HP0_DATA_WIDTH {32}] [get_bd_cells processing_system7_0]
+startgroup
+make_bd_intf_pins_external  [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
+endgroup
+set_property -dict [list CONFIG.PROTOCOL {AXI4}] [get_bd_intf_ports S_AXI_HP0_0]
+set_property name AXI_HP [get_bd_intf_ports S_AXI_HP0_0]
+save_bd_design

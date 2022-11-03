@@ -59,6 +59,15 @@ set_property -dict [list CONFIG.PCW_UART1_PERIPHERAL_ENABLE {1} CONFIG.PCW_UART1
 make_bd_intf_pins_external  [get_bd_intf_pins processing_system7_0/UART_1]
 set_property name UART [get_bd_intf_ports UART_1_0]
 
+# ADD EXTERNAL HP_AXI PORT
+set_property -dict [list CONFIG.PCW_USE_S_AXI_HP0 {1} CONFIG.PCW_S_AXI_HP0_DATA_WIDTH {32}] [get_bd_cells processing_system7_0]
+make_bd_intf_pins_external  [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
+#set_property -dict [list CONFIG.PROTOCOL {AXI4}] [get_bd_intf_ports S_AXI_HP0_0]
+set_property name AXI_HP [get_bd_intf_ports S_AXI_HP0_0]
+make_bd_pins_external  [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK]
+set_property name AXI_HP_ACLK [get_bd_ports S_AXI_HP0_ACLK_0]
+
+
 
 save_bd_design
 close_bd_design "processing_system"
