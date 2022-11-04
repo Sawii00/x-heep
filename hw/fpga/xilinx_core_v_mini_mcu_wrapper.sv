@@ -72,6 +72,48 @@ module xilinx_core_v_mini_mcu_wrapper
 
 );
 
+
+  logic AXI_HP_ACLK;
+  logic [31:0]AXI_HP_araddr_sig;
+  logic [1:0]AXI_HP_arburst_sig;
+  logic [3:0]AXI_HP_arcache_sig;
+  logic [5:0]AXI_HP_arid_sig;
+  logic [3:0]AXI_HP_arlen_sig;
+  logic [1:0]AXI_HP_arlock_sig;
+  logic [2:0]AXI_HP_arprot_sig;
+  logic [3:0]AXI_HP_arqos_sig;
+  logic AXI_HP_arready_sig;
+  logic [2:0]AXI_HP_arsize_sig;
+  logic AXI_HP_arvalid_sig;
+  logic [31:0]AXI_HP_awaddr_sig;
+  logic [1:0]AXI_HP_awburst_sig;
+  logic [3:0]AXI_HP_awcache_sig;
+  logic [5:0]AXI_HP_awid_sig;
+  logic [3:0]AXI_HP_awlen_sig;
+  logic [1:0]AXI_HP_awlock_sig;
+  logic [2:0]AXI_HP_awprot_sig;
+  logic [3:0]AXI_HP_awqos_sig;
+  logic AXI_HP_awready_sig;
+  logic [2:0]AXI_HP_awsize_sig;
+  logic AXI_HP_awvalid_sig;
+  logic [5:0]AXI_HP_bid_sig;
+  logic AXI_HP_bready_sig;
+  logic [1:0]AXI_HP_bresp_sig;
+  logic AXI_HP_bvalid_sig;
+  logic [31:0]AXI_HP_rdata_sig;
+  logic [5:0]AXI_HP_rid_sig;
+  logic AXI_HP_rlast_sig;
+  logic AXI_HP_rready_sig;
+  logic [1:0]AXI_HP_rresp_sig;
+  logic AXI_HP_rvalid_sig;
+  logic [31:0]AXI_HP_wdata_sig;
+  logic [5:0]AXI_HP_wid_sig;
+  logic AXI_HP_wlast_sig;
+  logic AXI_HP_wready_sig;
+  logic [3:0]AXI_HP_wstrb_sig;
+  logic AXI_HP_wvalid_sig;
+
+
   wire                               clk_gen;
   logic [                      31:0] exit_value;
   wire                               rst_n;
@@ -138,7 +180,112 @@ module xilinx_core_v_mini_mcu_wrapper
       .gpio_jtag_tms_i(jtag_tms_i),
       .gpio_jtag_trst_ni(jtag_trst_ni),
       .gpio_jtag_tdi_i(jtag_tdi_i),
-      .gpio_jtag_tdo_o(jtag_tdo_o)
+      .gpio_jtag_tdo_o(jtag_tdo_o),
+      .AXI_HP_ACLK(clk_gen), //Is this ok????
+      .AXI_HP_araddr(AXI_HP_araddr_sig),
+      .AXI_HP_arburst(AXI_HP_arburst_sig),
+      .AXI_HP_arcache(AXI_HP_arcache_sig),
+      .AXI_HP_arid(AXI_HP_arid_sig),
+      .AXI_HP_arlen(AXI_HP_arlen_sig),
+      .AXI_HP_arlock(AXI_HP_arlock_sig),
+      .AXI_HP_arprot(AXI_HP_arprot_sig),
+      .AXI_HP_arqos(AXI_HP_arqos_sig),
+      .AXI_HP_arready(AXI_HP_arready_sig),
+      .AXI_HP_arsize(AXI_HP_arsize_sig),
+      .AXI_HP_arvalid(AXI_HP_arvalid_sig),
+      .AXI_HP_awaddr(AXI_HP_awaddr_sig),
+      .AXI_HP_awburst(AXI_HP_awburst_sig),
+      .AXI_HP_awcache(AXI_HP_awcache_sig),
+      .AXI_HP_awid(AXI_HP_awid_sig),
+      .AXI_HP_awlen(AXI_HP_awlen_sig),
+      .AXI_HP_awlock(AXI_HP_awlock_sig),
+      .AXI_HP_awprot(AXI_HP_awprot_sig),
+      .AXI_HP_awqos(AXI_HP_awqos_sig),
+      .AXI_HP_awready(AXI_HP_awready_sig),
+      .AXI_HP_awsize(AXI_HP_awsize_sig),
+      .AXI_HP_awvalid(AXI_HP_awvalid_sig),
+      .AXI_HP_bid(AXI_HP_bid_sig),
+      .AXI_HP_bready(AXI_HP_bready_sig),
+      .AXI_HP_bresp(AXI_HP_bresp_sig),
+      .AXI_HP_bvalid(AXI_HP_bvalid_sig),
+      .AXI_HP_rdata(AXI_HP_rdata_sig),
+      .AXI_HP_rid(AXI_HP_rid_sig),
+      .AXI_HP_rlast(AXI_HP_rlast_sig),
+      .AXI_HP_rready(AXI_HP_rready_sig),
+      .AXI_HP_rresp(AXI_HP_rresp_sig),
+      .AXI_HP_rvalid(AXI_HP_rvalid_sig),
+      .AXI_HP_wdata(AXI_HP_wdata_sig),
+      .AXI_HP_wid(AXI_HP_wid_sig),
+      .AXI_HP_wlast(AXI_HP_wlast_sig),
+      .AXI_HP_wready(AXI_HP_wready_sig),
+      .AXI_HP_wstrb(AXI_HP_wstrb_sig),
+      .AXI_HP_wvalid(AXI_HP_wvalid_sig)
+  );
+
+  axi_spi_slave_wrap fake_flash(
+
+    .clk_i(clk_gen),
+    .rst_ni,
+
+    .test_mode,
+
+    .axi_master.aw_valid(AXI_HP_awvalid_sig),
+    .axi_master.aw_id(AXI_HP_awid_sig),
+    .axi_master.aw_prot(AXI_HP_awprot_sig),
+    .axi_master.aw_qos(AXI_HP_awqos_sig),
+    .axi_master.aw_cache(AXI_HP_awcache_sig),
+    .axi_master.aw_lock(AXI_HP_awlock_sig),
+    .axi_master.aw_burst(AXI_HP_awburst_sig),
+    .axi_master.aw_size(AXI_HP_awsize_sig),
+    .axi_master.aw_len(AXI_HP_awlen_sig),
+    .axi_master.aw_addr(AXI_HP_awaddr_sig),
+    .axi_master.aw_ready(AXI_HP_awready_sig),
+
+    .axi_master.w_valid(AXI_HP_wvalid_sig),
+    .axi_master.w_data(AXI_HP_wdata_sig),
+    .axi_master.w_strb(AXI_HP_wstrb_sig),
+    .axi_master.w_last(AXI_HP_wlast_sig),
+    .axi_master.w_ready(AXI_HP_wready_sig),
+
+    .axi_master.b_valid(AXI_HP_bvalid_sig),
+    .axi_master.b_id(AXI_HP_bid_sig),
+    .axi_master.b_resp(AXI_HP_bresp_sig),
+    .axi_master.b_ready(AXI_HP_bready_sig),
+
+    .axi_master.ar_valid(AXI_HP_arvalid_sig),
+    .axi_master.ar_id(AXI_HP_arid_sig),
+    .axi_master.ar_prot(AXI_HP_arprot_sig),
+    .axi_master.ar_qos(AXI_HP_arqos_sig),
+    .axi_master.ar_cache(AXI_HP_arcache_sig),
+    .axi_master.ar_lock(AXI_HP_arlock_sig),
+    .axi_master.ar_burst(AXI_HP_arburst_sig),
+    .axi_master.ar_size(AXI_HP_arsize_sig),
+    .axi_master.ar_len(AXI_HP_arlen_sig),
+    .axi_master.ar_addr(AXI_HP_araddr_sig),
+    .axi_master.ar_ready(AXI_HP_arready_sig),
+
+    .axi_master.r_valid(AXI_HP_rvalid_sig),
+    .axi_master.r_id(AXI_HP_rid_sig),
+    .axi_master.r_data(AXI_HP_rdata_sig),
+    .axi_master.r_resp(AXI_HP_rresp_sig),
+    .axi_master.r_last(AXI_HP_rlast_sig),
+    .axi_master.r_ready(AXI_HP_rready_sig),
+
+    .spi_clk,
+    .spi_cs,
+    .spi_oen0_o,
+    .spi_oen1_o,
+    .spi_oen2_o,
+    .spi_oen3_o,
+
+    .spi_sdo0,
+    .spi_sdo1,
+    .spi_sdo2,
+    .spi_sdo3,
+    .spi_sdi0,
+    .spi_sdi1,
+    .spi_sdi2,
+    .spi_sdi3
   );
 
 
