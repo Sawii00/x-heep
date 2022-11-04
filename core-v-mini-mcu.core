@@ -93,7 +93,7 @@ filesets:
   ip-fpga:
     files:
     - hw/fpga/scripts/xilinx_generate_clk_wizard.tcl:  { file_type: tclSource }
-    - hw/fpga/scripts/xilinx_generate_processing_system.tcl:  { file_type: tclSource }
+    #- hw/fpga/scripts/xilinx_generate_processing_system.tcl:  { file_type: tclSource }
     - hw/fpga/scripts/generate_sram.tcl:  { file_type: tclSource }
     - hw/fpga/prim_xilinx_clk.sv:  { file_type: systemVerilogSource }
     - hw/fpga/cv32e40p_xilinx_clock_gate.sv:  { file_type: systemVerilogSource }
