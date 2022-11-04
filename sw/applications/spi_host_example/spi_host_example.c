@@ -37,7 +37,7 @@ void handler_irq_fast_spi(void)
     // Clear fast interrupt
     fast_intr_ctrl_t fast_intr_ctrl;
     fast_intr_ctrl.base_addr = mmio_region_from_addr((uintptr_t)FAST_INTR_CTRL_START_ADDRESS);
-    clear_fast_interrupt(&fast_intr_ctrl, kSpi_e);
+    clear_fast_interrupt(&fast_intr_ctrl, kSpi_fic_e);
 
     spi_intr_flag = 1;
 }
@@ -51,7 +51,7 @@ void handler_irq_fast_spi_flash(void)
     // Clear fast interrupt
     fast_intr_ctrl_t fast_intr_ctrl;
     fast_intr_ctrl.base_addr = mmio_region_from_addr((uintptr_t)FAST_INTR_CTRL_START_ADDRESS);
-    clear_fast_interrupt(&fast_intr_ctrl, kSpiFlash);
+    clear_fast_interrupt(&fast_intr_ctrl, kSpiFlash_fic_e);
 
     spi_intr_flag = 1;
 }
@@ -82,8 +82,11 @@ int main(int argc, char *argv[])
     CSR_SET_BITS(CSR_REG_MIE, mask);
     spi_intr_flag = 0;
 
-    // Select SPI host as SPI output
-    soc_ctrl_select_spi_host(&soc_ctrl);
+    #ifdef USE_SPI_FLASH
+        // Select SPI host as SPI output
+        soc_ctrl_select_spi_host(&soc_ctrl);
+    #endif
+
     // Enable SPI host device
     spi_set_enable(&spi_host, true);
 
@@ -91,6 +94,8 @@ int main(int argc, char *argv[])
     spi_enable_evt_intr(&spi_host, true);
     // Enable RX watermark interrupt
     spi_enable_rxwm_intr(&spi_host, true);
+    // Enable SPI output
+    spi_output_enable(&spi_host, true);
 
     // Configure SPI clock
     // SPI clk freq = 1/2 core clk freq when clk_div = 0
