@@ -16,7 +16,7 @@
 #include "fast_intr_ctrl_regs.h"
 
 // Un-comment this line to use the SPI FLASH instead of the default SPI
-// #define USE_SPI_FLASH
+#define USE_SPI_FLASH
 
 // Simple example to check the SPI host peripheral is working. It checks the ram and flash have the same content
 #define DATA_CHUNK_ADDR 0x00008000
@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     // SPI Configuration
     // Configure chip 0 (flash memory)
     const uint32_t chip_cfg = spi_create_configopts((spi_configopts_t){
-        .clkdiv     = clk_div,
+        .clkdiv     = 7,
         .csnidle    = 0xF,
         .csntrail   = 0xF,
         .csnlead    = 0xF,
@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
     // Wait transaction is finished (polling register)
     // spi_wait_for_rx_watermark(&spi_host);
     // or wait for SPI interrupt
-    printf("Waiting for SPI...\n");
+    printf("Waiting for SPI...\r\n");
     while(spi_intr_flag==0) {
         wait_for_interrupt();
     }
@@ -208,22 +208,22 @@ int main(int argc, char *argv[])
         spi_read_word(&spi_host, &flash_data[i]);
     }
 
-    printf("flash vs ram...\n");
+    printf("flash vs ram...\r\n");
 
     uint32_t errors = 0;
     uint32_t* ram_ptr = DATA_CHUNK_ADDR;
     for (int i=0; i<8; i++) {
         if(flash_data[i] != *ram_ptr) {
-            printf("@%x : %x != %x\n", DATA_CHUNK_ADDR+i*4, flash_data[i], *ram_ptr);
+            printf("@%x : %x != %x\r\n", DATA_CHUNK_ADDR+i*4, flash_data[i], *ram_ptr);
             errors++;
         }
         ram_ptr++;
     }
 
     if (errors == 0) {
-        printf("success!\n");
+        printf("success!\r\n");
     } else {
-        printf("failure, %d errors!\n", errors);
+        printf("failure, %d errors!\r\n", errors);
     }
     return EXIT_SUCCESS;
 }

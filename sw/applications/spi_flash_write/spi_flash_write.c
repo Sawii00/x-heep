@@ -19,7 +19,7 @@
 #include "fast_intr_ctrl_regs.h"
 
 // Un-comment this line to use the SPI FLASH instead of the default SPI
-// #define USE_SPI_FLASH
+#define USE_SPI_FLASH
 
 #define COPY_DATA_WORDS 64 // Flash page size = 256 Bytes
 
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     // SPI Configuration
     // Configure chip 0 (flash memory)
     const uint32_t chip_cfg = spi_create_configopts((spi_configopts_t){
-        .clkdiv     = clk_div,
+        .clkdiv     = 7,
         .csnidle    = 0xF,
         .csntrail   = 0xF,
         .csnlead    = 0xF,
@@ -236,7 +236,7 @@ int main(int argc, char *argv[])
         spi_write_word(&spi_host, flash_cmd); // Push TX buffer
         uint32_t spi_status_cmd = spi_create_command((spi_command_t){
             .len        = 0,
-            .csaat      = false,
+            .csaat      = true,
             .speed      = kSpiSpeedStandard,
             .direction  = kSpiDirTxOnly
         });

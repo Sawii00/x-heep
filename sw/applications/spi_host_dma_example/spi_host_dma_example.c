@@ -17,7 +17,7 @@
 #include "fast_intr_ctrl_regs.h"
 
 // Un-comment this line to use the SPI FLASH instead of the default SPI
-// #define USE_SPI_FLASH
+#define USE_SPI_FLASH
 
 // Type of data frome the SPI. For types different than words the SPI data is requested in separate transactions
 // word(0), half-word(1), byte(2,3)
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     // SPI Configuration
     // Configure chip 0 (flash memory)
     const uint32_t chip_cfg = spi_create_configopts((spi_configopts_t){
-        .clkdiv     = clk_div,
+        .clkdiv     = 7,
         .csnidle    = 0xF,
         .csntrail   = 0xF,
         .csnlead    = 0xF,
@@ -205,11 +205,11 @@ int main(int argc, char *argv[])
     #endif
 
     // Wait for DMA interrupt
-    printf("Waiting for the DMA interrupt...\n");
+    printf("Waiting for the DMA interrupt...\n\r");
     while(dma_intr_flag == 0) {
         wait_for_interrupt();
     }
-    printf("triggered!\n");
+    printf("triggered!\n\r");
 
     // Power down flash
     const uint32_t powerdown_byte_cmd = 0xb9;
@@ -224,14 +224,14 @@ int main(int argc, char *argv[])
     spi_wait_for_ready(&spi_host);
 
     // The data is already in memory -- Check results
-    printf("flash vs ram...\n");
+    printf("flash vs ram...\n\r");
 
     uint32_t errors = 0;
     uint32_t count = 0;
     #if SPI_DATA_TYPE == 0
         for (int i = 0; i<COPY_DATA_NUM; i++) {
             if(flash_data[i] != copy_data[i]) {
-                printf("@%08x-@%08x : %02x != %02x\n" , &flash_data[i] , &copy_data[i], flash_data[i], copy_data[i]);
+                printf("@%08x-@%08x : %02x != %02x\n\r" , &flash_data[i] , &copy_data[i], flash_data[i], copy_data[i]);
                 errors++;
             }
             count++;
@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
     #else
         for (int i = 0; i<COPY_DATA_NUM; i++) {
             if(flash_data[0] != copy_data[i]) {
-                printf("@%08x-@%08x : %02x != %02x\n" , &flash_data[0] , &copy_data[i], flash_data[0], copy_data[i]);
+                printf("@%08x-@%08x : %02x != %02x\n\r" , &flash_data[0] , &copy_data[i], flash_data[0], copy_data[i]);
                 errors++;
             }
             count++;
@@ -247,9 +247,9 @@ int main(int argc, char *argv[])
     #endif
 
     if (errors == 0) {
-        printf("success! (bytes checked: %d)\n", count*sizeof(*copy_data));
+        printf("success! (bytes checked: %d)\n\r", count*sizeof(*copy_data));
     } else {
-        printf("failure, %d errors! (Out of %d)\n", errors, count);
+        printf("failure, %d errors! (Out of %d)\n\r", errors, count);
     }
     return EXIT_SUCCESS;
 }
