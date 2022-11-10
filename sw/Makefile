@@ -67,7 +67,7 @@ INC_FOLDERS_GCC             = $(addprefix -I ,$(INC_FOLDERS))
 %.dump: %.elf
 	$(RISCV_EXE_PREFIX)objdump -xD $^ > $@
 
-applications/sound_code/sound_code.elf: applications/sound_code/sound_code.c
+applications/heep_ultrasound/build/heep_ultrasound.elf: applications/heep_ultrasound/src/heep_ultrasound.c
 	$(RISCV_EXE_PREFIX)gcc -march=rv32imc -o $@ -w -Os -g -nostdlib \
 		$(CUSTOM_GCC_FLAGS) \
 		-DHOST_BUILD \
@@ -79,11 +79,11 @@ applications/sound_code/sound_code.elf: applications/sound_code/sound_code.c
 		$^ $(LIB_RUNTIME) \
 		$(LIB_BASE) \
 		$(LIB_DRIVERS) \
-		-Wl,-Map=applications/sound_code/sound_code.map \
+		-Wl,-Map=applications/heep_ultrasound/build/heep_ultrasound.map \
 		-L $(RISCV)/riscv32-unknown-elf/lib \
 		-lc -lm -lgcc -flto -ffunction-sections -fdata-sections -specs=nano.specs
 
-applications/sound_code/sound_code.flash_exec.elf: applications/sound_code/sound_code.c
+applications/heep_ultrasound/build/heep_ultrasound.flash_exec.elf: applications/heep_ultrasound/src/heep_ultrasound.c
 	$(RISCV_EXE_PREFIX)gcc -march=rv32im -o $@ -w -Os -g -nostdlib \
 		$(CUSTOM_GCC_FLAGS) \
 		-DHOST_BUILD \
@@ -95,11 +95,11 @@ applications/sound_code/sound_code.flash_exec.elf: applications/sound_code/sound
 		$^ $(LIB_RUNTIME) \
 		$(LIB_BASE) \
 		$(LIB_DRIVERS) \
-		-Wl,-Map=applications/sound_code/sound_code.flash_exec.map \
+		-Wl,-Map=applications/heep_ultrasound/build/heep_ultrasound.flash_exec.map \
 		-L $(RISCV)/riscv32-unknown-elf/lib \
 		-lc -lm -lgcc -flto -ffunction-sections -fdata-sections -specs=nano.specs
 
-applications/sound_code/sound_code.flash_load.elf: applications/sound_code/sound_code.c
+applications/heep_ultrasound/build/heep_ultrasound.flash_load.elf: applications/heep_ultrasound/src/heep_ultrasound.c
 	$(RISCV_EXE_PREFIX)gcc -march=rv32imc -o $@ -w -Os -g -nostdlib \
 		$(CUSTOM_GCC_FLAGS) \
 		-DHOST_BUILD \
@@ -111,7 +111,7 @@ applications/sound_code/sound_code.flash_load.elf: applications/sound_code/sound
 		$^ $(LIB_RUNTIME) \
 		$(LIB_BASE) \
 		$(LIB_DRIVERS) \
-		-Wl,-Map=applications/sound_code/sound_code.flash_load.map \
+		-Wl,-Map=applications/heep_ultrasound/build/heep_ultrasound.flash_load.map \
 		-L $(RISCV)/riscv32-unknown-elf/lib \
 		-lc -lm -lgcc -flto -ffunction-sections -fdata-sections -specs=nano.specs
 
