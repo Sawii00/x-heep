@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "soc_ctrl.h": "c",
+        "rv_timer.h": "c",
+        "rv_plic_regs.h": "c",
+        "rv_timer_regs.h": "c"
+    }
+}
