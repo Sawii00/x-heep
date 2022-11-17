@@ -134,3 +134,6 @@ cat uart_test.dtbo >/configfs/device-tree/overlays/uart_test/dtbo
 ```
 4. Make sure with dmesg that no errors were thrown and that /dev/ttySP1 has appeared -> that is x-heep's serial 
 
+## Adding Fake Flash
+Adding the Fake Flash is easy once the axi_spi_slave IP is tested and testbenched to reverse-engineer the protocol spoken. It offers a standard and qspi interface and an AXI4 FULL interface. The SPI interface is directly attached to x-heep's flash spi, while the AXI master interface is attached to the AXI interconnect crossbar connected to the PS's AXI HP port to give access to the entire address space. 
+When connecting, we need to remember to export the reset and aclk needed by the axi part of axi_spi_slave.

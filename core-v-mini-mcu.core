@@ -104,8 +104,11 @@ filesets:
     - hw/fpga/pad_cell_bypass_output_xilinx.sv:  { file_type: systemVerilogSource }
 
   fpga-arm-emulation:
+    depend:
+    - pulp-platform.org::axi_spi_slave
     files:
     - fpga_embedded_system_emulation/scripts/xilinx_generate_processing_system.tcl: {file_type: tclSource}
+    - fpga_embedded_system_emulation/rtl/utils.sv: {file_type: systemVerilogSource}
     - fpga_embedded_system_emulation/rtl/fpga_embedded_system_emulation_toplevel.sv: {file_type: systemVerilogSource}
     - fpga_embedded_system_emulation/constraints/pin_assign.xdc: {file_type: xdc}
     - fpga_embedded_system_emulation/constraints/constraints.xdc: {file_type: xdc}

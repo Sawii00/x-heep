@@ -1,0 +1,207 @@
+/*
+
+Xilinx Vivado v2022.1 (64-bit) [Major: 2022, Minor: 1]
+SW Build: 3526262 on Mon Apr 18 15:47:01 MDT 2022
+IP Build: 3524634 on Mon Apr 18 20:55:01 MDT 2022
+
+Process ID (PID): 74240
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Tue Nov 15 19:27:05 CET 2022
+Time zone: 	Central European Standard Time (Europe/Rome)
+
+OS: PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+OS Version: 5.10.0-18-amd64
+OS Architecture: amd64
+Available processors (cores): 4
+
+Display: 0
+Screen size: 1920x1080
+Screen resolution (DPI): 100
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+Scale size: 12
+
+Java version: 	11.0.11 64-bit
+Java home: 	/tools/Xilinx/Vivado/2022.1/tps/lnx64/jre11.0.11_9
+Java executable: 	/tools/Xilinx/Vivado/2022.1/tps/lnx64/jre11.0.11_9/bin/java
+Java arguments: 	[-Dsun.java2d.pmoffscreen=false, -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2, -Dsun.java2d.xrender=false, -Djdk.gtk.version=2, -Dsun.java2d.uiScale.enabled=false, -Xverify:none, -Dswing.aatext=true, -XX:-UsePerfData, -Djdk.map.althashing.threshold=512, -XX:StringTableSize=4072, --add-opens=java.desktop/com.sun.awt=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-opens=java.base/java.nio=ALL-UNNAMED, --add-opens=java.desktop/sun.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-opens=java.desktop/javax.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-opens=java.desktop/java.awt.event=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-exports=java.base/java.nio=ALL-UNNAMED, --add-exports=java.desktop/sun.swing=ALL-UNNAMED, --add-exports=java.desktop/javax.swing=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-exports=java.desktop/sun.swing=ALL-UNNAMED, --add-exports=java.desktop/sun.swing.table=ALL-UNNAMED, --add-exports=java.desktop/sun.swing.plaf.synth=ALL-UNNAMED, --add-exports=java.desktop/sun.awt.shell=ALL-UNNAMED, --add-exports=java.base/sun.security.action=ALL-UNNAMED, --add-exports=java.desktop/sun.font=ALL-UNNAMED, --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED, -XX:NewSize=60m, -XX:MaxNewSize=60m, -Xms256m, -Xmx3072m, -Xss5m, -Xrs]
+Java initial memory (-Xms): 	256 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	saverio
+User home directory: /home/saverio
+User working directory: /home/saverio/Documents/x-heep-biomedical/x-heep
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /tools/Xilinx/Vivado
+HDI_APPROOT: /tools/Xilinx/Vivado/2022.1
+RDI_DATADIR: /tools/Xilinx/Vivado/2022.1/data
+RDI_BINDIR: /tools/Xilinx/Vivado/2022.1/bin
+
+Vivado preferences file: /home/saverio/.Xilinx/Vivado/2022.1/vivado.xml
+Vivado preferences directory: /home/saverio/.Xilinx/Vivado/2022.1/
+Vivado layouts directory: /home/saverio/.Xilinx/Vivado/2022.1/data/layouts
+PlanAhead jar file: 	/tools/Xilinx/Vivado/2022.1/lib/classes/planAhead.jar
+Vivado log file: 	/home/saverio/Documents/x-heep-biomedical/x-heep/vivado.log
+Vivado journal file: 	/home/saverio/Documents/x-heep-biomedical/x-heep/vivado.jou
+Engine tmp dir: 	./.Xil/Vivado-74240-sawi
+
+Xilinx Environment Variables
+----------------------------
+XILINX: /tools/Xilinx/Vivado/2022.1/ids_lite/ISE
+XILINX_DSP: /tools/Xilinx/Vivado/2022.1/ids_lite/ISE
+XILINX_HLS: /tools/Xilinx/Vitis_HLS/2022.1
+XILINX_PLANAHEAD: /tools/Xilinx/Vivado/2022.1
+XILINX_VITIS: 
+XILINX_VIVADO: /tools/Xilinx/Vivado/2022.1
+XILINX_VIVADO_HLS: /tools/Xilinx/Vivado/2022.1
+
+
+GUI allocated memory:	308 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,869 MB
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+selectList(PAResourceQtoS.SyntheticaGettingStartedView_RECENT_PROJECTS, "/home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr", 0); // r
+// Opening Vivado Project: /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr. Version: Vivado v2022.1 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: FLOW_ADDED
+// Tcl Message: open_project /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,825 MB. GUI used memory: 61 MB. Current time: 11/15/22, 7:27:07 PM CET
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 106 MB (+108970kb) [00:00:35]
+// [Engine Memory]: 1,891 MB (+1831836kb) [00:00:35]
+// [GUI Memory]: 112 MB (+852kb) [00:00:38]
+// [GUI Memory]: 126 MB (+8236kb) [00:00:38]
+// WARNING: HEventQueue.dispatchEvent() is taking  8238 ms.
+// Tcl Message: open_project /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2022.1/data/ip'. 
+// WARNING: HEventQueue.dispatchEvent() is taking  2232 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1200 ms.
+// Tcl Message: open_project: Time (s): cpu = 00:00:41 ; elapsed = 00:00:19 . Memory (MB): peak = 7626.383 ; gain = 93.109 ; free physical = 1848 ; free virtual = 11012 
+// Project name: openhwgroup.org_systems_core-v-mini-mcu_0; location: /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado; part: xc7z020clg400-1
+// Elapsed time: 25 seconds
+dismissDialog("Open Project"); // bA
+// [GUI Memory]: 133 MB (+1205kb) [00:00:46]
+// WARNING: HEventQueue.dispatchEvent() is taking  1124 ms.
+// Elapsed time: 434 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Open Block Design]", 7, false); // n
+// Run Command: PAResourceCommand.PACommandNames_OPEN_BLOCK_DESIGN
+selectMenuItem((HResource) null, "processing_system.bd"); // ar
+// TclEventType: LOAD_FEATURE
+// TclEventType: RSB_SCRIPT_TASK
+// Tcl Message: open_bd_design {/home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/xilinx_clk_wizard/xilinx_clk_wizard.bd} 
+// Tcl Message: Reading block design file </home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/xilinx_clk_wizard/xilinx_clk_wizard.bd>... 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: LOAD_FEATURE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_OPEN_DIAGRAM
+// WARNING: HEventQueue.dispatchEvent() is taking  5289 ms.
+// Tcl Message: Adding component instance block -- xilinx.com:ip:clk_wiz:6.0 - clk_wiz_0 Successfully read diagram <xilinx_clk_wizard> from block design file </home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/xilinx_clk_wizard/xilinx_clk_wizard.bd> 
+// WARNING: HEventQueue.dispatchEvent() is taking  1002 ms.
+// Elapsed time: 14 seconds
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // v
+// Tcl Message: open_bd_design: Time (s): cpu = 00:00:21 ; elapsed = 00:00:08 . Memory (MB): peak = 7642.180 ; gain = 8.660 ; free physical = 1799 ; free virtual = 10966 
+dismissDialog("Open Block Design"); // bA
+// PAPropertyPanels.initPanels (clk_wiz_0) elapsed time: 0.3s
+// Run Command: PAResourceCommand.PACommandNames_CUSTOMIZE_RSB_BLOC
+// WARNING: HEventQueue.dispatchEvent() is taking  3195 ms.
+// Elapsed time: 18 seconds
+dismissDialog("Re-customize IP"); // N
+// Elapsed time: 18 seconds
+selectTab(PAResourceTtoZ.XPG_TabbedPane_TABBED_PANE, (HResource) null, "Output Clocks", 1); // cW
+// Elapsed time: 10 seconds
+selectTab(PAResourceTtoZ.XPG_TabbedPane_TABBED_PANE, (HResource) null, "MMCM Settings", 2); // cW
+selectTab(PAResourceTtoZ.XPG_TabbedPane_TABBED_PANE, (HResource) null, "Summary", 3); // cW
+dismissDialog("Re-customize IP"); // r
+// [GUI Memory]: 159 MB (+20271kb) [00:09:10]
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Open Block Design]", 7, false); // n
+// Run Command: PAResourceCommand.PACommandNames_OPEN_BLOCK_DESIGN
+selectMenuItem((HResource) null, "processing_system.bd"); // ar
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// Tcl Message: open_bd_design {/home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/processing_system/processing_system.bd} 
+// Tcl Message: Reading block design file </home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/processing_system/processing_system.bd>... Adding component instance block -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0 Adding component instance block -- xilinx.com:ip:axi_interconnect:2.1 - axi_interconnect_0 Adding component instance block -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc Adding component instance block -- xilinx.com:ip:axi_dwidth_converter:2.1 - auto_us 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_OPEN_DIAGRAM
+// WARNING: HEventQueue.dispatchEvent() is taking  3115 ms.
+dismissDialog("Open Block Design"); // bA
+// JavaFX intialization before: 1668537363057
+// JavaFX initialization after: 1668537363537

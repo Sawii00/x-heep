@@ -157,34 +157,6 @@ module core_v_mini_mcu
     input  logic gpio_29_i,
     output logic gpio_29_oe_o,
 
-    output logic spi_flash_sck_o,
-    input  logic spi_flash_sck_i,
-    output logic spi_flash_sck_oe_o,
-
-    output logic spi_flash_cs_0_o,
-    input  logic spi_flash_cs_0_i,
-    output logic spi_flash_cs_0_oe_o,
-
-    output logic spi_flash_cs_1_o,
-    input  logic spi_flash_cs_1_i,
-    output logic spi_flash_cs_1_oe_o,
-
-    output logic spi_flash_sd_0_o,
-    input  logic spi_flash_sd_0_i,
-    output logic spi_flash_sd_0_oe_o,
-
-    output logic spi_flash_sd_1_o,
-    input  logic spi_flash_sd_1_i,
-    output logic spi_flash_sd_1_oe_o,
-
-    output logic spi_flash_sd_2_o,
-    input  logic spi_flash_sd_2_i,
-    output logic spi_flash_sd_2_oe_o,
-
-    output logic spi_flash_sd_3_o,
-    input  logic spi_flash_sd_3_i,
-    output logic spi_flash_sd_3_oe_o,
-
     output logic spi_sck_o,
     input  logic spi_sck_i,
     output logic spi_sck_oe_o,
@@ -226,6 +198,14 @@ module core_v_mini_mcu
     output logic gpio_30_o,
     input  logic gpio_30_i,
     output logic gpio_30_oe_o,
+
+    output spi_flash_sck_o,
+    output spi_flash_cs_0_o,
+
+    output spi_flash_sd_0_o,
+    input spi_flash_sd_1_i,
+    output spi_flash_sd_2_o,
+    output spi_flash_sd_3_o,
 
 
     output reg_req_t pad_req_o,
@@ -357,6 +337,16 @@ module core_v_mini_mcu
     1'b0, irq_fast, 4'b0, irq_external, 3'b0, rv_timer_intr[0], 3'b0, irq_software, 3'b0
   };
 
+      logic spi_flash_sd_1_o;
+      logic spi_flash_sd_0_i;
+      logic spi_flash_sd_2_i;
+      logic spi_flash_sd_3_i;
+
+assign spi_flash_sd_1_o = 0;
+assign spi_flash_sd_0_i = 0;
+assign spi_flash_sd_2_i = 0;
+assign spi_flash_sd_3_i = 0;
+
   assign fast_intr = {
     1'b0,
     gpio_intr,
@@ -449,6 +439,7 @@ module core_v_mini_mcu
       .set_retentive_i(memory_subsystem_banks_set_retentive)
   );
 
+
   ao_peripheral_subsystem ao_peripheral_subsystem_i (
       .clk_i,
       .rst_ni,
@@ -461,13 +452,11 @@ module core_v_mini_mcu
       .spimemio_req_i(flash_mem_slave_req),
       .spimemio_resp_o(flash_mem_slave_resp),
       .spi_flash_sck_o,
-      .spi_flash_sck_en_o(spi_flash_sck_oe_o),
+      .spi_flash_sck_en_o(),
       .spi_flash_csb_o({spi_flash_cs_1_o, spi_flash_cs_0_o}),
-      .spi_flash_csb_en_o({spi_flash_cs_1_oe_o, spi_flash_cs_0_oe_o}),
+      .spi_flash_csb_en_o(),
       .spi_flash_sd_o({spi_flash_sd_3_o, spi_flash_sd_2_o, spi_flash_sd_1_o, spi_flash_sd_0_o}),
-      .spi_flash_sd_en_o({
-        spi_flash_sd_3_oe_o, spi_flash_sd_2_oe_o, spi_flash_sd_1_oe_o, spi_flash_sd_0_oe_o
-      }),
+      .spi_flash_sd_en_o(),
       .spi_flash_sd_i({spi_flash_sd_3_i, spi_flash_sd_2_i, spi_flash_sd_1_i, spi_flash_sd_0_i}),
       .spi_sck_o,
       .spi_sck_en_o(spi_sck_oe_o),

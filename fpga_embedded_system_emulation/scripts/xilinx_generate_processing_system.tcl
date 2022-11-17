@@ -1,9 +1,44 @@
 create_bd_design "processing_system"
 create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0
-set_property -dict [list CONFIG.PCW_USE_M_AXI_GP0 {0} CONFIG.PCW_EN_CLK0_PORT {0} CONFIG.PCW_EN_RST0_PORT {0} CONFIG.PCW_GPIO_EMIO_GPIO_ENABLE {1} CONFIG.PCW_GPIO_EMIO_GPIO_IO {5}] [get_bd_cells processing_system7_0]
+set_property -dict [list CONFIG.PCW_USE_M_AXI_GP0 {0} CONFIG.PCW_GPIO_EMIO_GPIO_ENABLE {1} CONFIG.PCW_GPIO_EMIO_GPIO_IO {5}] [get_bd_cells processing_system7_0]
 apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 -config {make_external "FIXED_IO, DDR" Master "Disable" Slave "Disable" }  [get_bd_cells processing_system7_0]
-#make_bd_intf_pins_external  [get_bd_intf_pins processing_system7_0/GPIO_0]
-#set_property name PS_GPIO2JTAG [get_bd_intf_ports GPIO_0_0]
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_interconnect_0
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config { Clk {/processing_system7_0/FCLK_CLK0 (50 MHz)} Freq {100} Ref_Clk0 {} Ref_Clk1 {} Ref_Clk2 {}}  [get_bd_pins axi_interconnect_0/ACLK]
+set_property -dict [list CONFIG.NUM_MI {1}] [get_bd_cells axi_interconnect_0]
+make_bd_intf_pins_external  [get_bd_intf_pins axi_interconnect_0/S00_AXI]
+set_property -dict [list CONFIG.PCW_USE_S_AXI_HP0 {1}] [get_bd_cells processing_system7_0]
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins axi_interconnect_0/M00_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config { Clk {/processing_system7_0/FCLK_CLK0 (50 MHz)} Freq {100} Ref_Clk0 {} Ref_Clk1 {} Ref_Clk2 {}}  [get_bd_pins axi_interconnect_0/M00_ACLK]
+connect_bd_net [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins processing_system7_0/FCLK_CLK0]
+connect_bd_net [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins rst_ps7_0_50M/peripheral_aresetn]
+set_property -dict [list CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ {20}] [get_bd_cells processing_system7_0]
+set_property name AXI_HP [get_bd_intf_ports S00_AXI_0]
+#set_property name AXI_HP_ACLK [get_bd_ports S00_ACLK_0]
+#set_property name AXI_HP_ARESETN [get_bd_ports S00_ARESETN_0]
+create_bd_port -dir O -type clk AXI_HP_ACLK
+connect_bd_net [get_bd_ports AXI_HP_ACLK] [get_bd_pins processing_system7_0/FCLK_CLK0]
+set_property -dict [list CONFIG.FREQ_HZ {20000000}] [get_bd_ports AXI_HP_ACLK]
+set_property CONFIG.ASSOCIATED_BUSIF {AXI_HP} [get_bd_ports /AXI_HP_ACLK]
+create_bd_port -dir O -type rst AXI_HP_ARESETN
+connect_bd_net [get_bd_ports AXI_HP_ARESETN] [get_bd_pins rst_ps7_0_50M/peripheral_aresetn]
+
+#create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0
+#connect_bd_intf_net [get_bd_intf_pins system_ila_0/SLOT_0_AXI] -boundary_type upper [get_bd_intf_pins axi_interconnect_0/M00_AXI]
+#set_property -dict [list CONFIG.C_DATA_DEPTH {2048}] [get_bd_cells system_ila_0]
+#apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config { Clk {/processing_system7_0/FCLK_CLK0 (50 MHz)} Freq {100} Ref_Clk0 {} Ref_Clk1 {} Ref_Clk2 {}}  [get_bd_pins system_ila_0/clk]
+#create_bd_port -dir I spi_test_cs
+#create_bd_port -dir I spi_test_clk
+#create_bd_port -dir I -from 3 -to 0 -type data spi_test_data
+#set_property -dict [list CONFIG.C_MON_TYPE {MIX}] [get_bd_cells system_ila_0]
+#create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_1
+#connect_bd_net [get_bd_ports spi_test_cs] [get_bd_pins xlconcat_1/In0]
+#connect_bd_net [get_bd_ports spi_test_clk] [get_bd_pins xlconcat_1/In1]
+#set_property -dict [list CONFIG.NUM_PORTS {3}] [get_bd_cells xlconcat_1]
+#connect_bd_net [get_bd_ports spi_test_data] [get_bd_pins xlconcat_1/In2]
+#connect_bd_net [get_bd_pins xlconcat_1/dout] [get_bd_pins system_ila_0/probe0]
+#set_property -dict [list CONFIG.IN2_WIDTH.VALUE_SRC USER CONFIG.IN1_WIDTH.VALUE_SRC USER CONFIG.IN0_WIDTH.VALUE_SRC USER] [get_bd_cells xlconcat_1]
+#set_property -dict [list CONFIG.IN2_WIDTH {4}] [get_bd_cells xlconcat_1]
+
 
 create_bd_port -dir I gpio_jtag_tdo_o
 create_bd_port -dir O gpio_jtag_tdi_i
@@ -58,6 +93,29 @@ set_property -dict [list CONFIG.PCW_UART1_PERIPHERAL_ENABLE {1} CONFIG.PCW_UART1
 #set_property -dict [list CONFIG.PCW_UART0_PERIPHERAL_ENABLE {1} CONFIG.PCW_UART0_GRP_FULL_ENABLE {0}] [get_bd_cells processing_system7_0]
 make_bd_intf_pins_external  [get_bd_intf_pins processing_system7_0/UART_1]
 set_property name UART [get_bd_intf_ports UART_1_0]
+
+# ADD EXTERNAL HP_AXI PORT
+#set_property -dict [list CONFIG.PCW_USE_S_AXI_HP0 {1} CONFIG.PCW_S_AXI_HP0_DATA_WIDTH {64}] [get_bd_cells processing_system7_0]
+#make_bd_intf_pins_external  [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
+#set_property -dict [list CONFIG.PROTOCOL {AXI4}] [get_bd_intf_ports S_AXI_HP0_0]
+#set_property name AXI_HP [get_bd_intf_ports S_AXI_HP0_0]
+#make_bd_pins_external  [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK]
+#set_property name AXI_HP_ACLK [get_bd_ports S_AXI_HP0_ACLK_0]
+
+
+
+#set_property -dict [list CONFIG.PCW_EN_CLK0_PORT {1}] [get_bd_cells processing_system7_0]
+#set_property -dict [list CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ {100}] [get_bd_cells processing_system7_0]
+
+
+# ADD SYSTEM ILA FOR HP PORT
+#create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.1 system_ila_0
+#connect_bd_net [get_bd_ports AXI_HP_ACLK] [get_bd_pins processing_system7_0/FCLK_CLK0]
+#connect_bd_net [get_bd_pins system_ila_0/clk] [get_bd_pins processing_system7_0/FCLK_CLK0]
+#create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_1
+#connect_bd_net [get_bd_pins system_ila_0/resetn] [get_bd_pins xlconstant_1/dout]
+#connect_bd_intf_net [get_bd_intf_pins system_ila_0/SLOT_0_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
+#connect_debug_port dbg_hub/clk [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK]
 
 
 save_bd_design

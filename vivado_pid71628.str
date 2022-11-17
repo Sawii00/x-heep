@@ -1,0 +1,232 @@
+/*
+
+Xilinx Vivado v2022.1 (64-bit) [Major: 2022, Minor: 1]
+SW Build: 3526262 on Mon Apr 18 15:47:01 MDT 2022
+IP Build: 3524634 on Mon Apr 18 20:55:01 MDT 2022
+
+Process ID (PID): 71628
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Tue Nov 15 18:58:18 CET 2022
+Time zone: 	Central European Standard Time (Europe/Rome)
+
+OS: PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+OS Version: 5.10.0-18-amd64
+OS Architecture: amd64
+Available processors (cores): 4
+
+Display: 0
+Screen size: 1920x1080
+Screen resolution (DPI): 100
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+Scale size: 12
+
+Java version: 	11.0.11 64-bit
+Java home: 	/tools/Xilinx/Vivado/2022.1/tps/lnx64/jre11.0.11_9
+Java executable: 	/tools/Xilinx/Vivado/2022.1/tps/lnx64/jre11.0.11_9/bin/java
+Java arguments: 	[-Dsun.java2d.pmoffscreen=false, -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2, -Dsun.java2d.xrender=false, -Djdk.gtk.version=2, -Dsun.java2d.uiScale.enabled=false, -Xverify:none, -Dswing.aatext=true, -XX:-UsePerfData, -Djdk.map.althashing.threshold=512, -XX:StringTableSize=4072, --add-opens=java.desktop/com.sun.awt=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-opens=java.base/java.nio=ALL-UNNAMED, --add-opens=java.desktop/sun.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-opens=java.desktop/javax.swing=ALL-UNNAMED, --add-opens=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-opens=java.desktop/java.awt.event=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.plaf.synth=ALL-UNNAMED, --add-exports=java.base/java.nio=ALL-UNNAMED, --add-exports=java.desktop/sun.swing=ALL-UNNAMED, --add-exports=java.desktop/javax.swing=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.tree=ALL-UNNAMED, --add-exports=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED, --add-exports=java.desktop/sun.swing=ALL-UNNAMED, --add-exports=java.desktop/sun.swing.table=ALL-UNNAMED, --add-exports=java.desktop/sun.swing.plaf.synth=ALL-UNNAMED, --add-exports=java.desktop/sun.awt.shell=ALL-UNNAMED, --add-exports=java.base/sun.security.action=ALL-UNNAMED, --add-exports=java.desktop/sun.font=ALL-UNNAMED, --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED, -XX:NewSize=60m, -XX:MaxNewSize=60m, -Xms256m, -Xmx3072m, -Xss5m, -Xrs]
+Java initial memory (-Xms): 	256 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	saverio
+User home directory: /home/saverio
+User working directory: /home/saverio/Documents/x-heep-biomedical/x-heep
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /tools/Xilinx/Vivado
+HDI_APPROOT: /tools/Xilinx/Vivado/2022.1
+RDI_DATADIR: /tools/Xilinx/Vivado/2022.1/data
+RDI_BINDIR: /tools/Xilinx/Vivado/2022.1/bin
+
+Vivado preferences file: /home/saverio/.Xilinx/Vivado/2022.1/vivado.xml
+Vivado preferences directory: /home/saverio/.Xilinx/Vivado/2022.1/
+Vivado layouts directory: /home/saverio/.Xilinx/Vivado/2022.1/data/layouts
+PlanAhead jar file: 	/tools/Xilinx/Vivado/2022.1/lib/classes/planAhead.jar
+Vivado log file: 	/home/saverio/Documents/x-heep-biomedical/x-heep/vivado.log
+Vivado journal file: 	/home/saverio/Documents/x-heep-biomedical/x-heep/vivado.jou
+Engine tmp dir: 	./.Xil/Vivado-71628-sawi
+
+Xilinx Environment Variables
+----------------------------
+XILINX: /tools/Xilinx/Vivado/2022.1/ids_lite/ISE
+XILINX_DSP: /tools/Xilinx/Vivado/2022.1/ids_lite/ISE
+XILINX_HLS: /tools/Xilinx/Vitis_HLS/2022.1
+XILINX_PLANAHEAD: /tools/Xilinx/Vivado/2022.1
+XILINX_VITIS: 
+XILINX_VIVADO: /tools/Xilinx/Vivado/2022.1
+XILINX_VIVADO_HLS: /tools/Xilinx/Vivado/2022.1
+
+
+GUI allocated memory:	311 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,863 MB
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// WARNING: HEventQueue.dispatchEvent() is taking  1287 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 1,807 MB. GUI used memory: 61 MB. Current time: 11/15/22, 6:58:20 PM CET
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+selectList(PAResourceQtoS.SyntheticaGettingStartedView_RECENT_PROJECTS, "/home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr", 0); // r
+// Opening Vivado Project: /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr. Version: Vivado v2022.1 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: FLOW_ADDED
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 74 MB (+75057kb) [00:00:57]
+// [Engine Memory]: 1,946 MB (+1889294kb) [00:00:57]
+// [GUI Memory]: 81 MB (+3478kb) [00:01:00]
+// [GUI Memory]: 85 MB (+305kb) [00:01:00]
+// [GUI Memory]: 97 MB (+7559kb) [00:01:01]
+// [GUI Memory]: 115 MB (+14292kb) [00:01:01]
+// WARNING: HEventQueue.dispatchEvent() is taking  8863 ms.
+// Tcl Message: open_project /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2022.1/data/ip'. 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,919 MB. GUI used memory: 73 MB. Current time: 11/15/22, 6:58:53 PM CET
+// WARNING: HEventQueue.dispatchEvent() is taking  2590 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1325 ms.
+// Tcl Message: open_project: Time (s): cpu = 00:00:30 ; elapsed = 00:00:13 . Memory (MB): peak = 7620.438 ; gain = 87.059 ; free physical = 1076 ; free virtual = 10586 
+// Project name: openhwgroup.org_systems_core-v-mini-mcu_0; location: /home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado; part: xc7z020clg400-1
+// Elapsed time: 18 seconds
+dismissDialog("Open Project"); // bA
+// [GUI Memory]: 122 MB (+380kb) [00:01:10]
+// [GUI Memory]: 135 MB (+7710kb) [00:01:56]
+// Elapsed time: 188 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Implementation, Open Implemented Design]", 18, true); // n - Node
+// Run Command: PAResourceCommand.PACommandNames_GOTO_IMPLEMENTED_DESIGN
+// Tcl Message: open_run impl_1 
+// HMemoryUtils.trashcanNow. Engine heap size: 2,052 MB. GUI used memory: 100 MB. Current time: 11/15/22, 7:02:37 PM CET
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: POWER_CNS_STALE
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: POWER_REPORT_STALE
+// TclEventType: SDC_CONSTRAINT_ADD
+// TclEventType: FLOORPLAN_MODIFY
+// HMemoryUtils.trashcanNow. Engine heap size: 2,283 MB. GUI used memory: 77 MB. Current time: 11/15/22, 7:03:00 PM CET
+// HMemoryUtils.trashcanNow. Engine heap size: 2,262 MB. GUI used memory: 82 MB. Current time: 11/15/22, 7:03:07 PM CET
+// TclEventType: DESIGN_NEW
+// HMemoryUtils.trashcanNow. Engine heap size: 2,262 MB. GUI used memory: 77 MB. Current time: 11/15/22, 7:03:15 PM CET
+// [Engine Memory]: 2,262 MB (+229342kb) [00:05:25]
+// TclEventType: DESIGN_NEW
+// Xgd.load filename: /tools/Xilinx/Vivado/2022.1/data/parts/xilinx/zynq/devint/zynq/xc7z020/xc7z020.xgd; ZipEntry: xc7z020_detail.xgd elapsed time: 1.9s
+// DeviceModel: Load Xgds SwingWorker Join Forever elapsed time: 2.4s
+// [GUI Memory]: 159 MB (+18436kb) [00:05:36]
+// [Engine Memory]: 2,386 MB (+10585kb) [00:05:36]
+// DeviceView Instantiated
+// WARNING: HEventQueue.dispatchEvent() is taking  11632 ms.
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: INFO: [Device 21-403] Loading part xc7z020clg400-1 
+// Tcl Message: Netlist sorting complete. Time (s): cpu = 00:00:00.72 ; elapsed = 00:00:00.7 . Memory (MB): peak = 7632.445 ; gain = 0.000 ; free physical = 646 ; free virtual = 10177 
+// Tcl Message: INFO: [Netlist 29-17] Analyzing 3240 Unisim elements for replacement INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds INFO: [Project 1-479] Netlist was created with Vivado 2022.1 INFO: [Project 1-570] Preparing netlist for logic optimization INFO: [Timing 38-478] Restoring timing data from binary archive. INFO: [Timing 38-479] Binary timing data restore complete. INFO: [Project 1-856] Restoring constraints from binary archive. INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are: 
+// Tcl Message:   general.maxThreads 
+// Tcl Message: INFO: [Project 1-853] Binary constraint restore complete. 
+// Tcl Message: Reading XDEF placement. Reading placer database... Reading XDEF routing. 
+// Tcl Message: Read XDEF Files: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 7930.477 ; gain = 49.938 ; free physical = 142 ; free virtual = 9534 
+// Tcl Message: Restored from archive | CPU: 4.930000 secs | Memory: 51.948616 MB | 
+// Tcl Message: Finished XDEF File Restore: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 7930.477 ; gain = 49.938 ; free physical = 142 ; free virtual = 9534 Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 8101.363 ; gain = 0.000 ; free physical = 409 ; free virtual = 9540 
+// Tcl Message: INFO: [Project 1-111] Unisim Transformation Summary:   A total of 41 instances were transformed.   IOBUF => IOBUF (IBUF, OBUFT): 38 instances   RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 2 instances   RAM32X1D => RAM32X1D (RAMD32(x2)): 1 instance   
+// WARNING: HEventQueue.dispatchEvent() is taking  1584 ms.
+// Tcl Message: open_run: Time (s): cpu = 00:01:47 ; elapsed = 00:01:21 . Memory (MB): peak = 8120.324 ; gain = 487.879 ; free physical = 246 ; free virtual = 9394 
+// ExpRunCommands.openImplResults elapsed time: 84.1s
+// TclEventType: DRC_ADDED
+// Device view-level: 0.0
+// TclEventType: HFED_INIT_ROUTE_STORAGE_COMPLETED
+// RouteApi::loadEngineXgdAndInitRouteStorage elapsed time: 13.8s
+// [GUI Memory]: 168 MB (+752kb) [00:05:42]
+// WARNING: HEventQueue.dispatchEvent() is taking  1225 ms.
+// RouteApi: Init Delay Mediator Swing Worker Finished
+// TclEventType: DRC_ADDED
+// TclEventType: METHODOLOGY_ADDED
+// Device view-level: 0.0
+// TclEventType: METHODOLOGY_ADDED
+// HMemoryUtils.trashcanNow. Engine heap size: 2,507 MB. GUI used memory: 114 MB. Current time: 11/15/22, 7:03:35 PM CET
+// [Engine Memory]: 2,507 MB (+2211kb) [00:05:45]
+// HMemoryUtils.trashcanNow. Engine heap size: 2,521 MB. GUI used memory: 111 MB. Current time: 11/15/22, 7:03:38 PM CET
+// TclEventType: POWER_UPDATED
+// [GUI Memory]: 184 MB (+8099kb) [00:05:53]
+// [GUI Memory]: 194 MB (+209kb) [00:05:55]
+// [Engine Memory]: 2,698 MB (+68709kb) [00:05:56]
+// WARNING: HEventQueue.dispatchEvent() is taking  9911 ms.
+// TclEventType: TIMING_SUMMARY_UPDATED
+// [Engine Memory]: 2,907 MB (+77928kb) [00:06:00]
+// WARNING: HEventQueue.dispatchEvent() is taking  3519 ms.
+// OpenDesignTask elapsed time: 104.9s
+// [GUI Memory]: 204 MB (+352kb) [00:06:02]
+// [Engine Memory]: 3,155 MB (+107672kb) [00:06:05]
+// 'eq' command handler elapsed time: 108 seconds
+// WARNING: HEventQueue.dispatchEvent() is taking  3779 ms.
+// [GUI Memory]: 214 MB (+318kb) [00:06:06]
+// HMemoryUtils.trashcanNow. Engine heap size: 2,763 MB. GUI used memory: 155 MB. Current time: 11/15/22, 7:03:57 PM CET
+// Elapsed time: 109 seconds
+dismissDialog("Open Implemented Design"); // bA
+dismissDialog("Update Design Hierarchy"); // bA
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f
+dismissDialog("Critical Messages"); // X
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Methodology Violations"); // aV
+selectButton(PAResourceCommand.PACommandNames_PROJECT_SUMMARY, "project_summary"); // D
+// Run Command: PAResourceCommand.PACommandNames_PROJECT_SUMMARY
+// Elapsed time: 13 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Open Block Design]", 7, false); // n
+// Run Command: PAResourceCommand.PACommandNames_OPEN_BLOCK_DESIGN
+selectMenuItem((HResource) null, "processing_system.bd"); // ar
+// TclEventType: LOAD_FEATURE
+// TclEventType: RSB_SCRIPT_TASK
+// Tcl Message: open_bd_design {/home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/processing_system/processing_system.bd} 
+// Tcl Message: Reading block design file </home/saverio/Documents/x-heep-biomedical/x-heep/build/openhwgroup.org_systems_core-v-mini-mcu_0/pynq-z2-arm-emulation-vivado/openhwgroup.org_systems_core-v-mini-mcu_0.srcs/sources_1/bd/processing_system/processing_system.bd>... 
+// TclEventType: RSB_CHANGE_CURRENT_DIAGRAM
+// TclEventType: LOAD_FEATURE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: RSB_OPEN_DIAGRAM
+// WARNING: HEventQueue.dispatchEvent() is taking  4772 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1078 ms.
+// Elapsed time: 10 seconds
+closeView(PAResourceOtoP.PAViews_PROJECT_SUMMARY, "Project Summary"); // v
+// Tcl Message: open_bd_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:08 . Memory (MB): peak = 8220.164 ; gain = 23.613 ; free physical = 154 ; free virtual = 8952 
+// JavaFX intialization before: 1668535470683
+dismissDialog("Open Block Design"); // bA
+// JavaFX initialization after: 1668535471289

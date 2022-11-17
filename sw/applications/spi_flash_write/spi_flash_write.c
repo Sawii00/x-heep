@@ -19,7 +19,7 @@
 #include "fast_intr_ctrl_regs.h"
 
 // Un-comment this line to use the SPI FLASH instead of the default SPI
-// #define USE_SPI_FLASH
+#define USE_SPI_FLASH
 
 #define COPY_DATA_WORDS 64 // Flash page size = 256 Bytes
 
@@ -138,11 +138,11 @@ int main(int argc, char *argv[])
     /////////////// WRITE ////////////////
 
     // Reset
-    const uint32_t reset_cmd = 0xFFFFFFFF;
+    const uint32_t reset_cmd = 0x0b;
     spi_write_word(&spi_host, reset_cmd);
     const uint32_t cmd_reset = spi_create_command((spi_command_t){
-        .len        = 3,
-        .csaat      = false,
+        .len        = 0,
+        .csaat      = true,
         .speed      = kSpiSpeedStandard,
         .direction  = kSpiDirTxOnly
     });
@@ -151,11 +151,11 @@ int main(int argc, char *argv[])
     spi_set_rx_watermark(&spi_host,1);
 
     // Power up flash
-    const uint32_t powerup_byte_cmd = 0xab;
+    const uint32_t powerup_byte_cmd = 0x00a08416; //0xF8F00200;
     spi_write_word(&spi_host, powerup_byte_cmd);
     const uint32_t cmd_powerup = spi_create_command((spi_command_t){
-        .len        = 0,
-        .csaat      = false,
+        .len        = 3,
+        .csaat      = true,
         .speed      = kSpiSpeedStandard,
         .direction  = kSpiDirTxOnly
     });
@@ -163,29 +163,34 @@ int main(int argc, char *argv[])
     spi_wait_for_ready(&spi_host);
 
     // Write enable
-    const uint32_t write_enable_cmd = 0x06;
-    spi_write_word(&spi_host, write_enable_cmd);
     const uint32_t cmd_write_en = spi_create_command((spi_command_t){
-        .len        = 0,
-        .csaat      = false,
+        .len        = 3,
+        .csaat      = true,
         .speed      = kSpiSpeedStandard,
-        .direction  = kSpiDirTxOnly
+        .direction  = kSpiDirRxOnly
     });
     spi_set_command(&spi_host, cmd_write_en);
     spi_wait_for_ready(&spi_host);
 
-    // Write command
-    const uint32_t write_byte_cmd = ((FLASH_ADDR << 8) | 0x02); // Program Page + addr
-    spi_write_word(&spi_host, write_byte_cmd);
-    const uint32_t cmd_write = spi_create_command((spi_command_t){
+    const uint32_t cmd_write_en2 = spi_create_command((spi_command_t){
         .len        = 3,
         .csaat      = true,
         .speed      = kSpiSpeedStandard,
-        .direction  = kSpiDirTxOnly
+        .direction  = kSpiDirRxOnly
+    });
+    spi_set_command(&spi_host, cmd_write_en2);
+    spi_wait_for_ready(&spi_host);
+
+    // Write command
+    const uint32_t cmd_write = spi_create_command((spi_command_t){
+        .len        = 3,
+        .csaat      = false,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirRxOnly
     });
     spi_set_command(&spi_host, cmd_write);
     spi_wait_for_ready(&spi_host);
-
+/*
     // -- DMA CONFIGURATION --
     dma_set_read_ptr_inc(&dma, (uint32_t) 4); // Do not increment address when reading from the SPI (Pop from FIFO)
     dma_set_write_ptr_inc(&dma, (uint32_t) 0); // Do not increment address when reading from the SPI (Pop from FIFO)
@@ -348,6 +353,6 @@ int main(int argc, char *argv[])
     } else {
         printf("failure, %d errors! (Out of %d)\n", errors, count);
     }
-
+*/
     return EXIT_SUCCESS;
 }
