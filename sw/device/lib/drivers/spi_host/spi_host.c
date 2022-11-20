@@ -10,12 +10,12 @@
 // SPI get functions
 
 volatile uint8_t spi_get_tx_queue_depth(const spi_host_t *spi) {
-    volatile uint32_t status_reg = spi_get_status(spi);
+    uint32_t status_reg = spi_get_status(spi);
     return bitfield_field32_read(status_reg, SPI_HOST_STATUS_TXQD_FIELD);
 }
 
 volatile spi_ch_status_t spi_get_tx_channel_status(const spi_host_t *spi) {
-    volatile uint32_t status_reg = spi_get_status(spi);
+    uint32_t status_reg = spi_get_status(spi);
     spi_ch_status_t ch_status = {
         .empty = bitfield_bit32_read(status_reg, SPI_HOST_STATUS_TXEMPTY_BIT),
         .full = bitfield_bit32_read(status_reg, SPI_HOST_STATUS_TXFULL_BIT),
@@ -26,12 +26,12 @@ volatile spi_ch_status_t spi_get_tx_channel_status(const spi_host_t *spi) {
 }
 
 volatile uint8_t spi_get_rx_queue_depth(const spi_host_t *spi) {
-    volatile uint32_t status_reg = spi_get_status(spi);
+    uint32_t status_reg = spi_get_status(spi);
     return bitfield_field32_read(status_reg, SPI_HOST_STATUS_RXQD_FIELD);
 }
 
 volatile spi_ch_status_t spi_get_rx_channel_status(const spi_host_t *spi) {
-    volatile uint32_t status_reg = spi_get_status(spi);
+    uint32_t status_reg = spi_get_status(spi);
     spi_ch_status_t ch_status = {
         .empty = bitfield_bit32_read(status_reg, SPI_HOST_STATUS_RXEMPTY_BIT),
         .full = bitfield_bit32_read(status_reg, SPI_HOST_STATUS_RXFULL_BIT),

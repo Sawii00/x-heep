@@ -109,6 +109,10 @@
             offset:  0x00040000,
             length:  0x00010000,
         },
+        spi2: {
+            offset:  0x00050000,
+            length:  0x00010000,
+        },
     },
 
     flash_mem: {
@@ -243,7 +247,8 @@
             type: output
         },
         gpio: {
-            num: 30,
+            //num: 30,
+            num: 24,
             num_offset: 0, #first gpio is gpio0
             type: inout
         },
@@ -268,6 +273,18 @@
             type: inout
         },
         spi_sd: {
+            num: 4,
+            type: inout
+        },
+        spi2_sck: {
+            num: 1,
+            type: inout
+        },
+        spi2_cs: {
+            num: 2,
+            type: inout
+        },
+        spi2_sd: {
             num: 4,
             type: inout
         },
