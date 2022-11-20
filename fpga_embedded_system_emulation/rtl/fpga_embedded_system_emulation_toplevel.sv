@@ -3,11 +3,11 @@
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 
 module fpga_embedded_system_emulation_toplevel
-    import obi_pkg::*;
-    import reg_pkg::*;
+  import obi_pkg::*;
+  import reg_pkg::*;
 #(
 
-)(
+) (
     inout logic clk_i,
     inout logic rst_i,
 
@@ -62,142 +62,142 @@ module fpga_embedded_system_emulation_toplevel
 
 
   // SIGNALS ENTERING HEEP
-  logic                              jtag_tck_i_sig;
-  logic                              jtag_tms_i_sig;
-  logic                              jtag_trst_ni_sig;
-  logic                              jtag_tdi_i_sig;
-  logic                              jtag_tdo_o_sig;
+  logic jtag_tck_i_sig;
+  logic jtag_tms_i_sig;
+  logic jtag_trst_ni_sig;
+  logic jtag_tdi_i_sig;
+  logic jtag_tdo_o_sig;
 
-  logic                              UART_rxd_sig;
-  logic                              UART_txd_sig;
-
-
-    //logic [3:0] spi_flash_sd_io_sig;
-    logic spi_flash_csb_o_sig;
-    logic spi_flash_sck_o_sig;
-
-    logic spi_oen0_o_sig;
-    logic spi_oen1_o_sig;
-    logic spi_oen2_o_sig;
-    logic spi_oen3_o_sig;
-
-    logic spi_sdo0_sig;
-    logic spi_sdo1_sig;
-    logic spi_sdo2_sig;
-    logic spi_sdo3_sig;
-    logic spi_sdi0_sig;
-    logic spi_sdi1_sig;
-    logic spi_sdi2_sig;
-    logic spi_sdi3_sig;
-  
-    parameter AXI_ADDR_WIDTH = 32;
-    parameter AXI_ADDR_WIDTH_SLAVE = 4;
-    parameter AXI_DATA_WIDTH = 32;
-    parameter C_NUM_REGISTERS = 5;
+  logic UART_rxd_sig;
+  logic UART_txd_sig;
 
 
-// PS SIDE PORTS
+  //logic [3:0] spi_flash_sd_io_sig;
+  logic spi_flash_csb_o_sig;
+  logic spi_flash_sck_o_sig;
+
+  logic spi_oen0_o_sig;
+  logic spi_oen1_o_sig;
+  logic spi_oen2_o_sig;
+  logic spi_oen3_o_sig;
+
+  logic spi_sdo0_sig;
+  logic spi_sdo1_sig;
+  logic spi_sdo2_sig;
+  logic spi_sdo3_sig;
+  logic spi_sdi0_sig;
+  logic spi_sdi1_sig;
+  logic spi_sdi2_sig;
+  logic spi_sdi3_sig;
+
+  parameter AXI_ADDR_WIDTH = 32;
+  parameter AXI_ADDR_WIDTH_SLAVE = 4;
+  parameter AXI_DATA_WIDTH = 32;
+  parameter C_NUM_REGISTERS = 5;
+
+
+  // PS SIDE PORTS
   logic AXI_HP_ACLK;
   logic AXI_HP_ARESETN;
-  logic [AXI_ADDR_WIDTH - 1:0]AXI_HP_araddr_sig;
-  logic [1:0]AXI_HP_arburst_sig;
-  logic [3:0]AXI_HP_arcache_sig;
-  logic [5:0]AXI_HP_arid_sig;
-  logic [3:0]AXI_HP_arlen_sig;
-  logic [1:0]AXI_HP_arlock_sig;
-  logic [2:0]AXI_HP_arprot_sig;
-  logic [3:0]AXI_HP_arqos_sig;
+  logic [AXI_ADDR_WIDTH - 1:0] AXI_HP_araddr_sig;
+  logic [1:0] AXI_HP_arburst_sig;
+  logic [3:0] AXI_HP_arcache_sig;
+  logic [5:0] AXI_HP_arid_sig;
+  logic [3:0] AXI_HP_arlen_sig;
+  logic [1:0] AXI_HP_arlock_sig;
+  logic [2:0] AXI_HP_arprot_sig;
+  logic [3:0] AXI_HP_arqos_sig;
   logic AXI_HP_arready_sig;
-  logic [2:0]AXI_HP_arsize_sig;
+  logic [2:0] AXI_HP_arsize_sig;
   logic AXI_HP_arvalid_sig;
-  logic [AXI_ADDR_WIDTH - 1:0]AXI_HP_awaddr_sig;
-  logic [1:0]AXI_HP_awburst_sig;
-  logic [3:0]AXI_HP_awcache_sig;
-  logic [5:0]AXI_HP_awid_sig;
-  logic [3:0]AXI_HP_awlen_sig;
-  logic [1:0]AXI_HP_awlock_sig;
-  logic [2:0]AXI_HP_awprot_sig;
-  logic [3:0]AXI_HP_awqos_sig;
+  logic [AXI_ADDR_WIDTH - 1:0] AXI_HP_awaddr_sig;
+  logic [1:0] AXI_HP_awburst_sig;
+  logic [3:0] AXI_HP_awcache_sig;
+  logic [5:0] AXI_HP_awid_sig;
+  logic [3:0] AXI_HP_awlen_sig;
+  logic [1:0] AXI_HP_awlock_sig;
+  logic [2:0] AXI_HP_awprot_sig;
+  logic [3:0] AXI_HP_awqos_sig;
   logic AXI_HP_awready_sig;
-  logic [2:0]AXI_HP_awsize_sig;
+  logic [2:0] AXI_HP_awsize_sig;
   logic AXI_HP_awvalid_sig;
-  logic [5:0]AXI_HP_bid_sig;
+  logic [5:0] AXI_HP_bid_sig;
   logic AXI_HP_bready_sig;
-  logic [1:0]AXI_HP_bresp_sig;
+  logic [1:0] AXI_HP_bresp_sig;
   logic AXI_HP_bvalid_sig;
-  logic [AXI_DATA_WIDTH - 1:0]AXI_HP_rdata_sig;
-  logic [5:0]AXI_HP_rid_sig;
+  logic [AXI_DATA_WIDTH - 1:0] AXI_HP_rdata_sig;
+  logic [5:0] AXI_HP_rid_sig;
   logic AXI_HP_rlast_sig;
   logic AXI_HP_rready_sig;
-  logic [1:0]AXI_HP_rresp_sig;
+  logic [1:0] AXI_HP_rresp_sig;
   logic AXI_HP_rvalid_sig;
-  logic [AXI_DATA_WIDTH - 1:0]AXI_HP_wdata_sig;
-  logic [5:0]AXI_HP_wid_sig;
+  logic [AXI_DATA_WIDTH - 1:0] AXI_HP_wdata_sig;
+  logic [5:0] AXI_HP_wid_sig;
   logic AXI_HP_wlast_sig;
   logic AXI_HP_wready_sig;
-  logic [3:0]AXI_HP_wstrb_sig;
+  logic [3:0] AXI_HP_wstrb_sig;
   logic AXI_HP_wvalid_sig;
 
   logic spi_test_clk_sig;
   logic spi_test_cs_sig;
-  logic [3:0]spi_test_data_sig;
+  logic [3:0] spi_test_data_sig;
 
 
-// ADDRESS HIJACKER PORTS
-    logic [AXI_ADDR_WIDTH-1:0] axi_master_awaddr_in_sig;
-    logic [AXI_ADDR_WIDTH-1:0] axi_master_araddr_in_sig;
+  // ADDRESS HIJACKER PORTS
+  logic [AXI_ADDR_WIDTH-1:0] axi_master_awaddr_in_sig;
+  logic [AXI_ADDR_WIDTH-1:0] axi_master_araddr_in_sig;
 
-    logic [AXI_ADDR_WIDTH_SLAVE - 1 : 0] s00_axi_awaddr_sig;
-    logic s00_axi_awvalid_sig;
-    logic s00_axi_awready_sig;
-    logic [AXI_DATA_WIDTH - 1 : 0] s00_axi_wdata_sig;
-    logic s00_axi_wvalid_sig;
-    logic s00_axi_wready_sig;
-    logic s00_axi_bvalid_sig;
-    logic s00_axi_bready_sig;
-    logic [(AXI_DATA_WIDTH / 8)-1 : 0] s00_axi_wstrb_sig;
-    logic [2 : 0] s00_axi_arprot_sig;
-    logic [2 : 0] s00_axi_awprot_sig;
-    logic [AXI_ADDR_WIDTH_SLAVE - 1 : 0] s00_axi_araddr_sig;
-    logic s00_axi_arvalid_sig;
-    logic s00_axi_arready_sig;
-    logic [AXI_DATA_WIDTH - 1 : 0] s00_axi_rdata_sig;
-    logic s00_axi_rvalid_sig;
-    logic s00_axi_rready_sig;
-    logic [1:0]s00_axi_rresp_sig;
-    logic [1:0]s00_axi_bresp_sig;
+  logic [AXI_ADDR_WIDTH_SLAVE - 1 : 0] s00_axi_awaddr_sig;
+  logic s00_axi_awvalid_sig;
+  logic s00_axi_awready_sig;
+  logic [AXI_DATA_WIDTH - 1 : 0] s00_axi_wdata_sig;
+  logic s00_axi_wvalid_sig;
+  logic s00_axi_wready_sig;
+  logic s00_axi_bvalid_sig;
+  logic s00_axi_bready_sig;
+  logic [(AXI_DATA_WIDTH / 8)-1 : 0] s00_axi_wstrb_sig;
+  logic [2 : 0] s00_axi_arprot_sig;
+  logic [2 : 0] s00_axi_awprot_sig;
+  logic [AXI_ADDR_WIDTH_SLAVE - 1 : 0] s00_axi_araddr_sig;
+  logic s00_axi_arvalid_sig;
+  logic s00_axi_arready_sig;
+  logic [AXI_DATA_WIDTH - 1 : 0] s00_axi_rdata_sig;
+  logic s00_axi_rvalid_sig;
+  logic s00_axi_rready_sig;
+  logic [1:0] s00_axi_rresp_sig;
+  logic [1:0] s00_axi_bresp_sig;
 
 
 
-  xilinx_core_v_mini_mcu_wrapper core_mcu_wrapper(
-    .clk_i(clk_i),
-    .rst_i(rst_i),
-    .rst_led(rst_led),
-    .clk_led(clk_led),
-    .clk_out(clk_out),
-    .boot_select_i(boot_select_i),
-    .execute_from_flash_i(execute_from_flash_i),
-    .jtag_tck_i(jtag_tck_i_sig),
-    .jtag_tms_i(jtag_tms_i_sig),
-    .jtag_trst_ni(jtag_trst_ni_sig),
-    .jtag_tdi_i(jtag_tdi_i_sig),
-    .jtag_tdo_o(jtag_tdo_o_sig),
-    .uart_rx_i(UART_txd_sig),
-    .uart_tx_o(UART_rxd_sig),
-    .gpio_io(gpio_io),
-    .exit_value_o(exit_value_o),
-    .exit_valid_o(exit_valid_o),
-    .spi_flash_sd0_o(spi_sdo0_sig),
-    .spi_flash_sd1_i(spi_sdi1_sig),
-    .spi_flash_sd2_o(spi_sdo2_sig),
-    .spi_flash_sd3_o(spi_sdo3_sig),
-    .spi_flash_csb_o(spi_flash_csb_o_sig),
-    .spi_flash_sck_o(spi_flash_sck_o_sig),
-    .spi_sd_io(spi_sd_io),
-    .spi_csb_o(spi_csb_o),
-    .spi_sck_o(spi_sck_o),
-    .i2c_scl_io(i2c_scl_io),
-    .i2c_sda_io(i2c_sda_io)
+  xilinx_core_v_mini_mcu_wrapper core_mcu_wrapper (
+      .clk_i(clk_i),
+      .rst_i(rst_i),
+      .rst_led(rst_led),
+      .clk_led(clk_led),
+      .clk_out(clk_out),
+      .boot_select_i(boot_select_i),
+      .execute_from_flash_i(execute_from_flash_i),
+      .jtag_tck_i(jtag_tck_i_sig),
+      .jtag_tms_i(jtag_tms_i_sig),
+      .jtag_trst_ni(jtag_trst_ni_sig),
+      .jtag_tdi_i(jtag_tdi_i_sig),
+      .jtag_tdo_o(jtag_tdo_o_sig),
+      .uart_rx_i(UART_txd_sig),
+      .uart_tx_o(UART_rxd_sig),
+      .gpio_io(gpio_io),
+      .exit_value_o(exit_value_o),
+      .exit_valid_o(exit_valid_o),
+      .spi_flash_sd0_o(spi_sdo0_sig),
+      .spi_flash_sd1_i(spi_sdi1_sig),
+      .spi_flash_sd2_o(spi_sdo2_sig),
+      .spi_flash_sd3_o(spi_sdo3_sig),
+      .spi_flash_csb_o(spi_flash_csb_o_sig),
+      .spi_flash_sck_o(spi_flash_sck_o_sig),
+      .spi_sd_io(spi_sd_io),
+      .spi_csb_o(spi_csb_o),
+      .spi_sck_o(spi_sck_o),
+      .i2c_scl_io(i2c_scl_io),
+      .i2c_sda_io(i2c_sda_io)
   );
 
 
@@ -230,7 +230,7 @@ module fpga_embedded_system_emulation_toplevel
       .gpio_jtag_trst_ni(jtag_trst_ni_sig),
       .gpio_jtag_tdi_i(jtag_tdi_i_sig),
       .gpio_jtag_tdo_o(jtag_tdo_o_sig),
-      .AXI_HP_ACLK(AXI_HP_ACLK), 
+      .AXI_HP_ACLK(AXI_HP_ACLK),
       .AXI_HP_ARESETN(AXI_HP_ARESETN),
       .AXI_HP_araddr(AXI_HP_araddr_sig),
       .AXI_HP_arburst(AXI_HP_arburst_sig),
@@ -290,116 +290,116 @@ module fpga_embedded_system_emulation_toplevel
   );
 
   axi_address_hijacker #(
-        .AXI_ADDR_WIDTH(AXI_ADDR_WIDTH),
-        //.AXI_ADDR_WIDTH_SLAVE(AXI_ADDR_WIDTH_SLAVE),
-        .C_S_AXI_DATA_WIDTH(AXI_DATA_WIDTH)
-        //.C_NUM_REGISTERS(C_NUM_REGISTERS)
-  ) add_hij(
-        .axi_master_awaddr_in(axi_master_awaddr_in_sig),
-        .axi_master_araddr_in(axi_master_araddr_in_sig),
+      .AXI_ADDR_WIDTH(AXI_ADDR_WIDTH),
+      //.AXI_ADDR_WIDTH_SLAVE(AXI_ADDR_WIDTH_SLAVE),
+      .C_S_AXI_DATA_WIDTH(AXI_DATA_WIDTH)
+      //.C_NUM_REGISTERS(C_NUM_REGISTERS)
+  ) add_hij (
+      .axi_master_awaddr_in(axi_master_awaddr_in_sig),
+      .axi_master_araddr_in(axi_master_araddr_in_sig),
 
-        // output write and read address by adding fixed offset 
-        .axi_master_araddr_out(AXI_HP_araddr_sig),
-        .axi_master_awaddr_out(AXI_HP_awaddr_sig),
+      // output write and read address by adding fixed offset 
+      .axi_master_araddr_out(AXI_HP_araddr_sig),
+      .axi_master_awaddr_out(AXI_HP_awaddr_sig),
 
-        .S_AXI_ACLK(AXI_HP_ACLK),
-        .S_AXI_ARESETN(AXI_HP_ARESETN),
+      .S_AXI_ACLK(AXI_HP_ACLK),
+      .S_AXI_ARESETN(AXI_HP_ARESETN),
 
-        .S_AXI_AWADDR(s00_axi_awaddr_sig),
-        .S_AXI_AWPROT(s00_axi_awprot_sig), ///////////
-        .S_AXI_AWVALID(s00_axi_awvalid_sig),
-        .S_AXI_AWREADY(s00_axi_awready_sig),
-        .S_AXI_WDATA(s00_axi_wdata_sig),
-        .S_AXI_WSTRB(s00_axi_wstrb_sig), 
-        .S_AXI_WVALID(s00_axi_wvalid_sig),
-        .S_AXI_WREADY(s00_axi_wready_sig),
-        .S_AXI_BRESP(s00_axi_bresp_sig), 
-        .S_AXI_BVALID(s00_axi_bvalid_sig),
-        .S_AXI_BREADY(s00_axi_bready_sig),
-        .S_AXI_ARADDR(s00_axi_araddr_sig),
-        .S_AXI_ARPROT(s00_axi_arprot_sig), ////////////
-        .S_AXI_ARVALID(s00_axi_arvalid_sig),
-        .S_AXI_ARREADY(s00_axi_arready_sig), 
-        .S_AXI_RDATA(s00_axi_rdata_sig),
-        .S_AXI_RRESP(s00_axi_rresp_sig),
-        .S_AXI_RVALID(s00_axi_rvalid_sig), 
-        .S_AXI_RREADY(s00_axi_rready_sig)
+      .S_AXI_AWADDR (s00_axi_awaddr_sig),
+      .S_AXI_AWPROT (s00_axi_awprot_sig),   ///////////
+      .S_AXI_AWVALID(s00_axi_awvalid_sig),
+      .S_AXI_AWREADY(s00_axi_awready_sig),
+      .S_AXI_WDATA  (s00_axi_wdata_sig),
+      .S_AXI_WSTRB  (s00_axi_wstrb_sig),
+      .S_AXI_WVALID (s00_axi_wvalid_sig),
+      .S_AXI_WREADY (s00_axi_wready_sig),
+      .S_AXI_BRESP  (s00_axi_bresp_sig),
+      .S_AXI_BVALID (s00_axi_bvalid_sig),
+      .S_AXI_BREADY (s00_axi_bready_sig),
+      .S_AXI_ARADDR (s00_axi_araddr_sig),
+      .S_AXI_ARPROT (s00_axi_arprot_sig),   ////////////
+      .S_AXI_ARVALID(s00_axi_arvalid_sig),
+      .S_AXI_ARREADY(s00_axi_arready_sig),
+      .S_AXI_RDATA  (s00_axi_rdata_sig),
+      .S_AXI_RRESP  (s00_axi_rresp_sig),
+      .S_AXI_RVALID (s00_axi_rvalid_sig),
+      .S_AXI_RREADY (s00_axi_rready_sig)
 
   );
 
   axi_spi_slave #(
-    .AXI_DATA_WIDTH(AXI_DATA_WIDTH)
-  )fake_flash(
+      .AXI_DATA_WIDTH(AXI_DATA_WIDTH)
+  ) fake_flash (
 
-    .axi_aclk(AXI_HP_ACLK),
-    .axi_aresetn(AXI_HP_ARESETN),
+      .axi_aclk(AXI_HP_ACLK),
+      .axi_aresetn(AXI_HP_ARESETN),
 
-    .test_mode('0),
+      .test_mode('0),
 
-    .axi_master_aw_valid(AXI_HP_awvalid_sig),
-    .axi_master_aw_id(AXI_HP_awid_sig),
-    .axi_master_aw_prot(AXI_HP_awprot_sig),
-    .axi_master_aw_qos(AXI_HP_awqos_sig),
-    .axi_master_aw_cache(AXI_HP_awcache_sig),
-    .axi_master_aw_lock(AXI_HP_awlock_sig),
-    .axi_master_aw_burst(AXI_HP_awburst_sig),
-    .axi_master_aw_size(AXI_HP_awsize_sig),
-    .axi_master_aw_len(AXI_HP_awlen_sig),
-    .axi_master_aw_addr(axi_master_awaddr_in_sig),
-    .axi_master_aw_ready(AXI_HP_awready_sig),
+      .axi_master_aw_valid(AXI_HP_awvalid_sig),
+      .axi_master_aw_id(AXI_HP_awid_sig),
+      .axi_master_aw_prot(AXI_HP_awprot_sig),
+      .axi_master_aw_qos(AXI_HP_awqos_sig),
+      .axi_master_aw_cache(AXI_HP_awcache_sig),
+      .axi_master_aw_lock(AXI_HP_awlock_sig),
+      .axi_master_aw_burst(AXI_HP_awburst_sig),
+      .axi_master_aw_size(AXI_HP_awsize_sig),
+      .axi_master_aw_len(AXI_HP_awlen_sig),
+      .axi_master_aw_addr(axi_master_awaddr_in_sig),
+      .axi_master_aw_ready(AXI_HP_awready_sig),
 
-    .axi_master_w_valid(AXI_HP_wvalid_sig),
-    .axi_master_w_data(AXI_HP_wdata_sig),
-    .axi_master_w_strb(AXI_HP_wstrb_sig),
-    .axi_master_w_last(AXI_HP_wlast_sig),
-    .axi_master_w_ready(AXI_HP_wready_sig),
+      .axi_master_w_valid(AXI_HP_wvalid_sig),
+      .axi_master_w_data (AXI_HP_wdata_sig),
+      .axi_master_w_strb (AXI_HP_wstrb_sig),
+      .axi_master_w_last (AXI_HP_wlast_sig),
+      .axi_master_w_ready(AXI_HP_wready_sig),
 
-    .axi_master_b_valid(AXI_HP_bvalid_sig),
-    .axi_master_b_id(AXI_HP_bid_sig),
-    .axi_master_b_resp(AXI_HP_bresp_sig),
-    .axi_master_b_ready(AXI_HP_bready_sig),
+      .axi_master_b_valid(AXI_HP_bvalid_sig),
+      .axi_master_b_id(AXI_HP_bid_sig),
+      .axi_master_b_resp(AXI_HP_bresp_sig),
+      .axi_master_b_ready(AXI_HP_bready_sig),
 
-    .axi_master_ar_valid(AXI_HP_arvalid_sig),
-    .axi_master_ar_id(AXI_HP_arid_sig),
-    .axi_master_ar_prot(AXI_HP_arprot_sig),
-    .axi_master_ar_qos(AXI_HP_arqos_sig),
-    .axi_master_ar_cache(AXI_HP_arcache_sig),
-    .axi_master_ar_lock(AXI_HP_arlock_sig),
-    .axi_master_ar_burst(AXI_HP_arburst_sig),
-    .axi_master_ar_size(AXI_HP_arsize_sig),
-    .axi_master_ar_len(AXI_HP_arlen_sig),
-    .axi_master_ar_addr(axi_master_araddr_in_sig),
-    .axi_master_ar_ready(AXI_HP_arready_sig),
+      .axi_master_ar_valid(AXI_HP_arvalid_sig),
+      .axi_master_ar_id(AXI_HP_arid_sig),
+      .axi_master_ar_prot(AXI_HP_arprot_sig),
+      .axi_master_ar_qos(AXI_HP_arqos_sig),
+      .axi_master_ar_cache(AXI_HP_arcache_sig),
+      .axi_master_ar_lock(AXI_HP_arlock_sig),
+      .axi_master_ar_burst(AXI_HP_arburst_sig),
+      .axi_master_ar_size(AXI_HP_arsize_sig),
+      .axi_master_ar_len(AXI_HP_arlen_sig),
+      .axi_master_ar_addr(axi_master_araddr_in_sig),
+      .axi_master_ar_ready(AXI_HP_arready_sig),
 
-    .axi_master_r_valid(AXI_HP_rvalid_sig),
-    .axi_master_r_id(AXI_HP_rid_sig),
-    .axi_master_r_data(AXI_HP_rdata_sig),
-    .axi_master_r_resp(AXI_HP_rresp_sig),
-    .axi_master_r_last(AXI_HP_rlast_sig),
-    .axi_master_r_ready(AXI_HP_rready_sig),
+      .axi_master_r_valid(AXI_HP_rvalid_sig),
+      .axi_master_r_id(AXI_HP_rid_sig),
+      .axi_master_r_data(AXI_HP_rdata_sig),
+      .axi_master_r_resp(AXI_HP_rresp_sig),
+      .axi_master_r_last(AXI_HP_rlast_sig),
+      .axi_master_r_ready(AXI_HP_rready_sig),
 
-    .spi_sclk(spi_flash_sck_o_sig),
-    .spi_cs(spi_flash_csb_o_sig),
-    //.spi_oen0_o(spi_oen0_o_sig),
-    //.spi_oen1_o(spi_oen1_o_sig),
-    //.spi_oen2_o(spi_oen2_o_sig),
-    //.spi_oen3_o(spi_oen3_o_sig),
+      .spi_sclk(spi_flash_sck_o_sig),
+      .spi_cs  (spi_flash_csb_o_sig),
+      //.spi_oen0_o(spi_oen0_o_sig),
+      //.spi_oen1_o(spi_oen1_o_sig),
+      //.spi_oen2_o(spi_oen2_o_sig),
+      //.spi_oen3_o(spi_oen3_o_sig),
 
-    //.spi_sdo0(spi_sdo0_sig),
-    .spi_sdo1(spi_sdi1_sig),
-    //.spi_sdo2(spi_sdo2_sig),
-    //.spi_sdo3(spi_sdo3_sig),
-    .spi_sdi0(spi_sdo0_sig),
-    //.spi_sdi1(spi_sdi1_sig),
-    .spi_sdi2(spi_sdo2_sig),
-    .spi_sdi3(spi_sdo3_sig)
+      //.spi_sdo0(spi_sdo0_sig),
+      .spi_sdo1(spi_sdi1_sig),
+      //.spi_sdo2(spi_sdo2_sig),
+      //.spi_sdo3(spi_sdo3_sig),
+      .spi_sdi0(spi_sdo0_sig),
+      //.spi_sdi1(spi_sdi1_sig),
+      .spi_sdi2(spi_sdo2_sig),
+      .spi_sdi3(spi_sdo3_sig)
   );
 
 
-// TESTING PURPOSES -> THEY WILL BE INPUT TO PS AND READ BY SYSTEM ILA
-assign spi_test_clk_sig = spi_flash_sck_o_sig; 
-assign spi_test_cs_sig = spi_flash_csb_o_sig;
-assign spi_test_data_sig = {spi_sdo0_sig, spi_sdi1_sig, spi_sdo2_sig, spi_sdo3_sig};
+  // TESTING PURPOSES -> THEY WILL BE INPUT TO PS AND READ BY SYSTEM ILA
+  assign spi_test_clk_sig  = spi_flash_sck_o_sig;
+  assign spi_test_cs_sig   = spi_flash_csb_o_sig;
+  assign spi_test_data_sig = {spi_sdo0_sig, spi_sdi1_sig, spi_sdo2_sig, spi_sdo3_sig};
 
 
 

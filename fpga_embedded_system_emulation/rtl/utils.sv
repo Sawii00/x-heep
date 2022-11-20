@@ -8,11 +8,10 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-module pulp_clock_inverter
-(
+module pulp_clock_inverter (
     input  logic clk_i,
     output logic clk_o
-  );
+);
 
   assign clk_o = ~clk_i;
 

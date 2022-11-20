@@ -203,7 +203,7 @@ module core_v_mini_mcu
     output spi_flash_cs_0_o,
 
     output spi_flash_sd_0_o,
-    input spi_flash_sd_1_i,
+    input  spi_flash_sd_1_i,
     output spi_flash_sd_2_o,
     output spi_flash_sd_3_o,
 
@@ -337,15 +337,15 @@ module core_v_mini_mcu
     1'b0, irq_fast, 4'b0, irq_external, 3'b0, rv_timer_intr[0], 3'b0, irq_software, 3'b0
   };
 
-      logic spi_flash_sd_1_o;
-      logic spi_flash_sd_0_i;
-      logic spi_flash_sd_2_i;
-      logic spi_flash_sd_3_i;
+  logic spi_flash_sd_1_o;
+  logic spi_flash_sd_0_i;
+  logic spi_flash_sd_2_i;
+  logic spi_flash_sd_3_i;
 
-assign spi_flash_sd_1_o = 0;
-assign spi_flash_sd_0_i = 0;
-assign spi_flash_sd_2_i = 0;
-assign spi_flash_sd_3_i = 0;
+  assign spi_flash_sd_1_o = 0;
+  assign spi_flash_sd_0_i = 0;
+  assign spi_flash_sd_2_i = 0;
+  assign spi_flash_sd_3_i = 0;
 
   assign fast_intr = {
     1'b0,
