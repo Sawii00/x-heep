@@ -71,6 +71,72 @@ void handler_irq_fast_dma(void)
 uint32_t flash_data[COPY_DATA_WORDS] __attribute__ ((aligned (4))) = {0x76543210,0xfedcba98,0x579a6f90,0x657d5bee,0x758ee41f,0x01234567,0xfedbca98,0x89abcdef,0x679852fe,0xff8252bb,0x763b4521,0x6875adaa,0x09ac65bb,0x666ba334,0x44556677,0x0000ba98};
 uint32_t copy_data[COPY_DATA_WORDS] __attribute__ ((aligned (4)))  = { 0 };
 
+void read_flash(uint32_t address, uint32_t*res, uint32_t amount)
+{
+    // Reset
+    const uint32_t reset_cmd = 0x0b;
+    spi_write_word(&spi_host, reset_cmd);
+    const uint32_t cmd_reset = spi_create_command((spi_command_t){
+        .len        = 0,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_reset);
+    spi_wait_for_ready(&spi_host);
+    spi_set_rx_watermark(&spi_host, amount);
+
+    // Power up flash
+    uint32_t powerup_byte_cmd = address; //0xF8F00200;
+    spi_write_word(&spi_host, powerup_byte_cmd);
+    const uint32_t cmd_powerup = spi_create_command((spi_command_t){
+        .len        = 3,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_powerup);
+    spi_wait_for_ready(&spi_host);
+
+    spi_write_word(&spi_host, 0x00000000);
+    const uint32_t cmd_dummy = spi_create_command((spi_command_t){
+        .len        = 0,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_dummy);
+    spi_wait_for_ready(&spi_host);
+
+    for(uint32_t i = 0; i < amount - 1; ++i)
+    {
+        const uint32_t cmd_write_en = spi_create_command((spi_command_t){
+            .len        = 3,
+            .csaat      = true,
+            .speed      = kSpiSpeedStandard,
+            .direction  = kSpiDirRxOnly
+        });
+        spi_set_command(&spi_host, cmd_write_en);
+        spi_wait_for_ready(&spi_host);
+    }
+
+    // Write command
+    const uint32_t cmd_write = spi_create_command((spi_command_t){
+        .len        = 3,
+        .csaat      = false,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirRxOnly
+    });
+    spi_set_command(&spi_host, cmd_write);
+    spi_wait_for_ready(&spi_host);
+
+    spi_wait_for_rx_watermark(&spi_host);
+    for(uint32_t i = 0; i < amount; ++i)
+    {
+        spi_read_word(&spi_host, res + i);
+    }
+}
+
 int main(int argc, char *argv[])
 {
     #ifndef USE_SPI_FLASH
@@ -136,9 +202,7 @@ int main(int argc, char *argv[])
     spi_set_csid(&spi_host, 0);
 
     /////////////// WRITE ////////////////
-
-    // Reset
-    const uint32_t reset_cmd = 0x0b;
+    const uint32_t reset_cmd = 0x11;
     spi_write_word(&spi_host, reset_cmd);
     const uint32_t cmd_reset = spi_create_command((spi_command_t){
         .len        = 0,
@@ -148,48 +212,31 @@ int main(int argc, char *argv[])
     });
     spi_set_command(&spi_host, cmd_reset);
     spi_wait_for_ready(&spi_host);
-    spi_set_rx_watermark(&spi_host,1);
 
-    // Power up flash
-    const uint32_t powerup_byte_cmd = 0x00a08416; //0xF8F00200;
-    spi_write_word(&spi_host, powerup_byte_cmd);
-    const uint32_t cmd_powerup = spi_create_command((spi_command_t){
-        .len        = 3,
-        .csaat      = true,
+    const uint32_t set_dummy_cycle = 0x07;
+    spi_write_word(&spi_host, set_dummy_cycle);
+    const uint32_t cmd_set_dummy = spi_create_command((spi_command_t){
+        .len        = 0,
+        .csaat      = false,
         .speed      = kSpiSpeedStandard,
         .direction  = kSpiDirTxOnly
     });
-    spi_set_command(&spi_host, cmd_powerup);
+    spi_set_command(&spi_host, cmd_set_dummy);
     spi_wait_for_ready(&spi_host);
 
-    // Write enable
-    const uint32_t cmd_write_en = spi_create_command((spi_command_t){
-        .len        = 3,
-        .csaat      = true,
-        .speed      = kSpiSpeedStandard,
-        .direction  = kSpiDirRxOnly
-    });
-    spi_set_command(&spi_host, cmd_write_en);
-    spi_wait_for_ready(&spi_host);
+    uint32_t res[3] = {0, 0, 0};
+    read_flash(0x0f000000, res, 3);
+    printf("Received Word: %x\r\n", res[0]);
+    printf("Received Word: %x\r\n", res[1]);
+    printf("Received Word: %x\r\n", res[2]);
 
-    const uint32_t cmd_write_en2 = spi_create_command((spi_command_t){
-        .len        = 3,
-        .csaat      = true,
-        .speed      = kSpiSpeedStandard,
-        .direction  = kSpiDirRxOnly
-    });
-    spi_set_command(&spi_host, cmd_write_en2);
-    spi_wait_for_ready(&spi_host);
+    read_flash(0, res, 3);
+    printf("Received Word: %x\r\n", res[0]);
+    printf("Received Word: %x\r\n", res[1]);
+    printf("Received Word: %x\r\n", res[2]);
+    printf("\n\n\r");
 
-    // Write command
-    const uint32_t cmd_write = spi_create_command((spi_command_t){
-        .len        = 3,
-        .csaat      = false,
-        .speed      = kSpiSpeedStandard,
-        .direction  = kSpiDirRxOnly
-    });
-    spi_set_command(&spi_host, cmd_write);
-    spi_wait_for_ready(&spi_host);
+
 /*
     // -- DMA CONFIGURATION --
     dma_set_read_ptr_inc(&dma, (uint32_t) 4); // Do not increment address when reading from the SPI (Pop from FIFO)
