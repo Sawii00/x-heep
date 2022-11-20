@@ -71,6 +71,58 @@ void handler_irq_fast_dma(void)
 uint32_t flash_data[COPY_DATA_WORDS] __attribute__ ((aligned (4))) = {0x76543210,0xfedcba98,0x579a6f90,0x657d5bee,0x758ee41f,0x01234567,0xfedbca98,0x89abcdef,0x679852fe,0xff8252bb,0x763b4521,0x6875adaa,0x09ac65bb,0x666ba334,0x44556677,0x0000ba98};
 uint32_t copy_data[COPY_DATA_WORDS] __attribute__ ((aligned (4)))  = { 0 };
 
+//ADDRESS MUST BE BIG ENDIAN
+void write_flash(uint32_t address, uint32_t*data, uint32_t amount)
+{
+    const uint32_t write_to_mem = 0x02;
+    spi_write_word(&spi_host, write_to_mem);
+    const uint32_t cmd_write_to_mem = spi_create_command((spi_command_t){
+        .len        = 0,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_write_to_mem);
+    spi_wait_for_ready(&spi_host);
+
+    uint32_t addr_cmd = __builtin_bswap32(address); //0xF8F00200;
+    spi_write_word(&spi_host, addr_cmd);
+    const uint32_t cmd_address = spi_create_command((spi_command_t){
+        .len        = 3,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_address);
+    spi_wait_for_ready(&spi_host);
+
+
+    for(uint32_t i = 0; i < amount - 1; ++i)
+    {
+        spi_write_word(&spi_host, __builtin_bswap32(data[i]));
+        const uint32_t cmd_write_en = spi_create_command((spi_command_t){
+            .len        = 3,
+            .csaat      = true,
+            .speed      = kSpiSpeedStandard,
+            .direction  = kSpiDirTxOnly
+        });
+        spi_set_command(&spi_host, cmd_write_en);
+        spi_wait_for_ready(&spi_host);
+    }
+
+    // Write command
+    spi_write_word(&spi_host, __builtin_bswap32(data[amount - 1]));
+    const uint32_t cmd_write = spi_create_command((spi_command_t){
+        .len        = 3,
+        .csaat      = false,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_write);
+    spi_wait_for_ready(&spi_host);
+
+}
+
 void read_flash(uint32_t address, uint32_t*res, uint32_t amount)
 {
     // Reset
@@ -87,7 +139,7 @@ void read_flash(uint32_t address, uint32_t*res, uint32_t amount)
     spi_set_rx_watermark(&spi_host, amount);
 
     // Power up flash
-    uint32_t powerup_byte_cmd = address; //0xF8F00200;
+    uint32_t powerup_byte_cmd = __builtin_bswap32(address); //0xF8F00200;
     spi_write_word(&spi_host, powerup_byte_cmd);
     const uint32_t cmd_powerup = spi_create_command((spi_command_t){
         .len        = 3,
@@ -134,6 +186,7 @@ void read_flash(uint32_t address, uint32_t*res, uint32_t amount)
     for(uint32_t i = 0; i < amount; ++i)
     {
         spi_read_word(&spi_host, res + i);
+        res[i] = __builtin_bswap32(res[i]);
     }
 }
 
@@ -213,6 +266,19 @@ int main(int argc, char *argv[])
     spi_set_command(&spi_host, cmd_reset);
     spi_wait_for_ready(&spi_host);
 
+
+
+
+
+    spi_set_rx_watermark(&spi_host, 1);
+
+
+
+
+
+
+
+
     const uint32_t set_dummy_cycle = 0x07;
     spi_write_word(&spi_host, set_dummy_cycle);
     const uint32_t cmd_set_dummy = spi_create_command((spi_command_t){
@@ -221,23 +287,44 @@ int main(int argc, char *argv[])
         .speed      = kSpiSpeedStandard,
         .direction  = kSpiDirTxOnly
     });
+
     spi_set_command(&spi_host, cmd_set_dummy);
     spi_wait_for_ready(&spi_host);
 
-    uint32_t res[3] = {0, 0, 0};
-    read_flash(0x0f000000, res, 3);
-    printf("Received Word: %x\r\n", res[0]);
-    printf("Received Word: %x\r\n", res[1]);
-    printf("Received Word: %x\r\n", res[2]);
+    /*
+    uint32_t res[3] = {0x1c, 0x2c, 0x3c};
+    write_flash(0, res, 3);
 
     read_flash(0, res, 3);
-    printf("Received Word: %x\r\n", res[0]);
-    printf("Received Word: %x\r\n", res[1]);
-    printf("Received Word: %x\r\n", res[2]);
-    printf("\n\n\r");
 
+    printf("Received Word: %x\r\n\r", res[0]);
+    printf("Received Word: %x\r\n\r", res[1]);
+    printf("Received Word: %x\r\n\r", res[2]);
+    printf("\n\r\n\r\r");
+    */
 
-/*
+    uint32_t write_to_mem = 0x02;
+    spi_write_word(&spi_host, write_to_mem);
+    uint32_t cmd_write_to_mem = spi_create_command((spi_command_t){
+        .len        = 0,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_write_to_mem);
+    spi_wait_for_ready(&spi_host);
+
+    uint32_t addr_cmd = 0; //0xF8F00200;
+    spi_write_word(&spi_host, addr_cmd);
+    uint32_t cmd_address = spi_create_command((spi_command_t){
+        .len        = 3,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_address);
+    spi_wait_for_ready(&spi_host);
+
     // -- DMA CONFIGURATION --
     dma_set_read_ptr_inc(&dma, (uint32_t) 4); // Do not increment address when reading from the SPI (Pop from FIFO)
     dma_set_write_ptr_inc(&dma, (uint32_t) 0); // Do not increment address when reading from the SPI (Pop from FIFO)
@@ -274,13 +361,14 @@ int main(int argc, char *argv[])
     spi_wait_for_ready(&spi_host);
 
     // Wait for SPI interrupt
-    printf("Waiting for the SPI interrupt...\n");
+    printf("Waiting for the SPI interrupt...\n\r");
     while(spi_intr_flag == 0) {
         wait_for_interrupt();
     }
-    printf("triggered!\n");
+    printf("triggered!\n\r");
 
     // Check status register status waiting for ready
+    /*
     bool flash_busy = true;
     uint8_t flash_resp[4] = {0xff,0xff,0xff,0xff};
     while(flash_busy){
@@ -306,9 +394,10 @@ int main(int argc, char *argv[])
         spi_read_word(&spi_host, &flash_resp[0]);
         if ((flash_resp[0] & 0x01) == 0) flash_busy = false;
     }
+    */
 
-    printf("%d Bytes written in Flash at @0x%08x \n", COPY_DATA_WORDS*sizeof(*flash_data), FLASH_ADDR);
-    printf("Checking write...\n");
+    printf("%d Bytes written in Flash at @0x%08x \n\r", COPY_DATA_WORDS*sizeof(*flash_data), FLASH_ADDR);
+    printf("Checking write...\n\r");
 
     const uint32_t mask2 = 1 << 19;
     CSR_SET_BITS(CSR_REG_MIE, mask2);
@@ -331,23 +420,39 @@ int main(int argc, char *argv[])
         dma_set_spi_mode(&dma, (uint32_t) 3); // The DMA will wait for the SPI FLASH RX FIFO valid signal
     #endif
 
-    // The address bytes sent through the SPI to the Flash are in reverse order
-    const int32_t read_byte_cmd = ((REVERT_24b_ADDR(FLASH_ADDR) << 8) | 0x03);
-
-    // Fill TX FIFO with TX data (read command + 3B address)
-    spi_write_word(&spi_host, read_byte_cmd);
-    // Wait for readiness to process commands
+    write_to_mem = 0x0b;
+    spi_write_word(&spi_host, write_to_mem);
+    cmd_write_to_mem = spi_create_command((spi_command_t){
+        .len        = 0,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_write_to_mem);
     spi_wait_for_ready(&spi_host);
 
-    // Load command FIFO with read command (1 Byte at single speed)
-    const uint32_t cmd_read = spi_create_command((spi_command_t){
+    addr_cmd = 0; //0xF8F00200;
+    spi_write_word(&spi_host, addr_cmd);
+    cmd_address = spi_create_command((spi_command_t){
         .len        = 3,
         .csaat      = true,
         .speed      = kSpiSpeedStandard,
         .direction  = kSpiDirTxOnly
     });
-    spi_set_command(&spi_host, cmd_read);
+    spi_set_command(&spi_host, cmd_address);
     spi_wait_for_ready(&spi_host);
+    // The address bytes sent through the SPI to the Flash are in reverse order
+
+    spi_write_word(&spi_host, 0x00000000);
+    const uint32_t cmd_dummy = spi_create_command((spi_command_t){
+        .len        = 0,
+        .csaat      = true,
+        .speed      = kSpiSpeedStandard,
+        .direction  = kSpiDirTxOnly
+    });
+    spi_set_command(&spi_host, cmd_dummy);
+    spi_wait_for_ready(&spi_host);
+
 
     const uint32_t cmd_read_rx = spi_create_command((spi_command_t){
         .len        = COPY_DATA_WORDS*sizeof(*copy_data) - 1,
@@ -363,43 +468,30 @@ int main(int argc, char *argv[])
     dma_set_cnt_start(&dma, (uint32_t) COPY_DATA_WORDS*sizeof(*copy_data)); // Number of bytes received by SPI
 
     // Wait for DMA interrupt
-    printf("Waiting for the DMA interrupt...\n");
+    printf("Waiting for the DMA interrupt...\n\r");
     while(dma_intr_flag == 0) {
         wait_for_interrupt();
     }
-    printf("triggered!\n");
-
-    // Power down flash
-    const uint32_t powerdown_byte_cmd = 0xb9;
-    spi_write_word(&spi_host, powerdown_byte_cmd);
-    const uint32_t cmd_powerdown = spi_create_command((spi_command_t){
-        .len        = 0,
-        .csaat      = false,
-        .speed      = kSpiSpeedStandard,
-        .direction  = kSpiDirTxOnly
-    });
-    spi_set_command(&spi_host, cmd_powerdown);
-    spi_wait_for_ready(&spi_host);
+    printf("triggered!\n\r");
 
     // The data is already in memory -- Check results
-    printf("flash vs ram...\n");
+    printf("flash vs ram...\n\r");
 
     int i;
     uint32_t errors = 0;
     uint32_t count = 0;
     for (i = 0; i<COPY_DATA_WORDS; i++) {
         if(flash_data[i] != copy_data[i]) {
-            printf("@%08x-@%08x : %02x != %02x\n" , &flash_data[i] , &copy_data[i], flash_data[i], copy_data[i]);
+            printf("@%08x-@%08x : %02x != %02x\n\r" , &flash_data[i] , &copy_data[i], flash_data[i], copy_data[i]);
             errors++;
         }
         count++;
     }
 
     if (errors == 0) {
-        printf("success! (Words checked: %d)\n", count);
+        printf("success! (Words checked: %d)\n\r", count);
     } else {
-        printf("failure, %d errors! (Out of %d)\n", errors, count);
+        printf("failure, %d errors! (Out of %d)\n\r", errors, count);
     }
-*/
     return EXIT_SUCCESS;
 }
