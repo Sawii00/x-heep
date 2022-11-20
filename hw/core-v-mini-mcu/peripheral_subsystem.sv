@@ -42,7 +42,7 @@ module peripheral_subsystem
     output logic cio_sda_o,
     output logic cio_sda_en_o,
 
-        // SPI Host
+    // SPI Host
     output logic                               spi2_sck_o,
     output logic                               spi2_sck_en_o,
     output logic [spi_host_reg_pkg::NumCS-1:0] spi2_csb_o,
@@ -270,7 +270,7 @@ module peripheral_subsystem
       .reg_rsp_o(peripheral_slv_rsp[core_v_mini_mcu_pkg::I2C_IDX])
   );
 
-    spi_host #(
+  spi_host #(
       .reg_req_t(reg_pkg::reg_req_t),
       .reg_rsp_t(reg_pkg::reg_rsp_t)
   ) spi2_host (

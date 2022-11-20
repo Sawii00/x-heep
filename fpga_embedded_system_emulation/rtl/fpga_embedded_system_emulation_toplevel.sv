@@ -33,6 +33,10 @@ module fpga_embedded_system_emulation_toplevel
     inout logic spi_csb_o,
     inout logic spi_sck_o,
 
+    inout logic [3:0] spi2_sd_io,
+    inout logic spi2_csb_o,
+    inout logic spi2_sck_o,
+
     inout logic i2c_scl_io,
     inout logic i2c_sda_io,
 
@@ -196,6 +200,9 @@ module fpga_embedded_system_emulation_toplevel
       .spi_sd_io(spi_sd_io),
       .spi_csb_o(spi_csb_o),
       .spi_sck_o(spi_sck_o),
+      .spi2_sd_io(spi2_sd_io),
+      .spi2_csb_o(spi2_csb_o),
+      .spi2_sck_o(spi2_sck_o),
       .i2c_scl_io(i2c_scl_io),
       .i2c_sda_io(i2c_sda_io)
   );
