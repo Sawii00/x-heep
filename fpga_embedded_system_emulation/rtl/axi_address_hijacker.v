@@ -404,6 +404,9 @@
 	end    
 
 	// Add user logic here
+	/*
+		Combinational Adder that intercepts an axi4 address line (read and write) and adds an offset to it. 
+	*/
     assign axi_master_araddr_out = axi_master_araddr_in + slv_reg0;
     assign axi_master_awaddr_out = axi_master_awaddr_in + slv_reg0;
 

@@ -252,7 +252,7 @@ static inline __attribute__((always_inline)) volatile uint32_t spi_get_status(co
  * @param spi Pointer to spi_host_t representing the target SPI.
  */
 static inline __attribute__((always_inline)) volatile bool spi_get_active(const spi_host_t *spi) {
-    uint32_t status_reg = spi_get_status(spi);
+    volatile uint32_t status_reg = spi_get_status(spi);
     return bitfield_bit32_read(status_reg, SPI_HOST_STATUS_ACTIVE_BIT);
 }
 
@@ -262,7 +262,7 @@ static inline __attribute__((always_inline)) volatile bool spi_get_active(const 
  * @param spi Pointer to spi_host_t representing the target SPI.
  */
 static inline __attribute__((always_inline)) volatile bool spi_get_ready(const spi_host_t *spi) {
-    uint32_t status_reg = spi_get_status(spi);
+    volatile uint32_t status_reg = spi_get_status(spi);
     return bitfield_bit32_read(status_reg, SPI_HOST_STATUS_READY_BIT);
 }
 
